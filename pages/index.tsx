@@ -1,5 +1,5 @@
-import fm from 'front-matter'
 import fs from 'fs'
+import matter from 'gray-matter'
 import { useStore } from 'store'
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 const index = ({ files, posts }: Props) => {
   const darkMode = useStore((state) => state.darkMode)
   const changeDarkMode = useStore((state) => state.changeDarkMode)
-  console.log(fm(posts[0]))
+  console.log(matter(posts[0]))
 
   return (
     <>
