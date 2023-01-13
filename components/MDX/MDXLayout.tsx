@@ -1,5 +1,6 @@
 import { ReactNode } from '@mdx-js/react/lib'
 import Head from 'next/head'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 type Props = {
@@ -49,13 +50,13 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
         <div className="flex">
           <div className="p-5 w-full lg:w-[calc(100%_-_300px)]">
             <h1 className="justify-center text-5xl mb-10">{text}</h1>
-            <img
+            <Image
               src={eyecatch}
-              // width={4000}
-              // height={2000}
+              width={4000}
+              height={2000}
               alt="eyecatch image"
               className="rounded-md drop-shadow-md"
-              // priority
+              priority
             />
             {children}
           </div>
