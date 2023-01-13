@@ -4,11 +4,11 @@ import { MdContentCopy } from 'react-icons/md'
 import { useStore } from 'store'
 
 const MDXComponents = () => {
+  const darkMode = useStore((state) => state.darkMode)
   const copy = useStore((state) => state.copy)
   const changeCopy = useStore((state) => state.changeCopy)
 
   const handleOnClick = (e) => {
-    console.log(copy)
     navigator.clipboard
       .writeText(e)
       .then(changeCopy)
@@ -19,14 +19,19 @@ const MDXComponents = () => {
     h1: (props) => (
       <h1
         id={props.children}
-        className="border-b-2 border-base-200 my-5 pb-2 text-3xl break-words"
+        className="scroll-mt-20 border-b-2 border-base-200 mt-8 mb-5 pb-2 text-3xl break-words"
         {...props}
       />
     ),
     h2: (props) => <h2 className="my-3 text-2xl" {...props} />,
     h3: (props) => <h3 className="my-2 text-xl" {...props} />,
     table: (props) => (
-      <table className="drop-shadow-md table my-5" {...props} />
+      <div className="overflow-x-auto">
+        <table
+          className="drop-shadow-md overflow-auto table my-3 text-center"
+          {...props}
+        />
+      </div>
     ),
     a: (props) => <Link className="hover:underline" {...props} />,
     blockquote: (props) => (
@@ -53,7 +58,9 @@ const MDXComponents = () => {
             handleOnClick(e.currentTarget.nextElementSibling.textContent)
           }}
         >
-          <MdContentCopy className="h-5 w-5" />
+          <MdContentCopy
+            className={`h-5 w-5 ${!darkMode && 'text-base-100'}`}
+          />
         </div>
         <pre {...props} />
       </div>

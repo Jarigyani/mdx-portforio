@@ -21,9 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </MDXProvider>
       </div>
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   )
 }
