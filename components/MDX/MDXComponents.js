@@ -23,7 +23,9 @@ const MDXComponents = () => {
         {...props}
       />
     ),
-    h2: (props) => <h2 className="my-3 text-2xl" {...props} />,
+    h2: (props) => (
+      <h2 id={props.children} className="my-3 text-2xl" {...props} />
+    ),
     h3: (props) => <h3 className="my-2 text-xl" {...props} />,
     table: (props) => (
       <div className="overflow-x-auto">
@@ -42,9 +44,9 @@ const MDXComponents = () => {
     p: (props) => <p {...props} />,
     img: (props) => (
       <Image
-        className="rounded-md drop-shadow-md my-3"
-        width={4000}
-        height={2000}
+        className="rounded-md drop-shadow-md mx-auto my-3"
+        width={860}
+        height={860}
         alt=""
         {...props}
       />

@@ -1,4 +1,5 @@
 import { ReactNode } from '@mdx-js/react/lib'
+import { motion } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -20,8 +21,17 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
   let ignore = false
   useEffect(() => {
     if (!ignore) {
-      const elements = document.querySelectorAll('h1')
-      const targets = Array.from(elements)
+      // mdxファイル内のメタデータ非表示
+      const meta = document.querySelector('h2')
+      meta?.classList.add('hidden')
+      // なんかいらない線表示されるから👇
+      const hr = document.querySelector('hr')
+      hr?.classList.add('hidden')
+
+      const elements = document.querySelectorAll('h1, h2')
+      // .slice(2)は記事タイトルとメタデータを取り除くため
+      const targets = Array.from(elements).slice(2)
+
       targets.map((target) => {
         target.id &&
           setToc((prev) => [...prev, { id: target.id, tag: target.tagName }])
@@ -46,14 +56,20 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
         rel="stylesheet"
         href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
       />
-      <div className="mx-auto mb-5 max-w-[1200px]">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mb-5 max-w-[1200px]"
+      >
         <div className="flex">
           <div className="p-5 w-full lg:w-[calc(100%_-_300px)]">
             <h1 className="justify-center text-5xl mb-10">{text}</h1>
             <Image
               src={eyecatch}
-              width={4000}
-              height={2000}
+              width={860}
+              height={860}
               alt="eyecatch image"
               className="rounded-md drop-shadow-md"
               priority
@@ -71,7 +87,7 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
             </ul>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

@@ -2,11 +2,12 @@ import Footer from '@/Footer'
 import MDXComponents from '@/MDX/MDXComponents'
 import Navbar from '@/Navbar'
 import { MDXProvider } from '@mdx-js/react'
+import { AnimatePresence } from 'framer-motion'
 import type { AppProps } from 'next/app'
 import { useStore } from 'store'
 import '../styles/globals.css'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const darkMode = useStore((state) => state.darkMode)
   const { components } = MDXComponents()
 
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <Navbar />
         <MDXProvider components={components}>
-          <Component {...pageProps} />
+          <AnimatePresence mode="wait">
+            <Component {...pageProps} key={router.asPath} />
+          </AnimatePresence>
         </MDXProvider>
       </div>
       <Footer />
