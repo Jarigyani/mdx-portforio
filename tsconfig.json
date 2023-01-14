@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -25,7 +25,8 @@
     "**/*.tsx",
     "**/*.mdx",
     "components/MDXComponents.js",
-    "components/GetMeta.js"
+    "components/GetMeta.js",
+    "components/blog/Wpshell.jsx"
   ],
   "exclude": ["node_modules"]
 }

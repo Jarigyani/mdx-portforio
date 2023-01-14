@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useStore } from 'store'
 
 type Props = {
   text: string
@@ -16,31 +17,33 @@ type Toc = {
 }
 
 const MDXLayout = ({ text, eyecatch, children }: Props) => {
+  const { darkMode } = useStore()
   const [toc, setToc] = useState<Toc[]>([])
 
-  let ignore = false
   useEffect(() => {
-    if (!ignore) {
-      // mdxファイル内のメタデータ非表示
-      const meta = document.querySelector('h2')
-      meta?.classList.add('hidden')
-      // なんかいらない線表示されるから👇
-      const hr = document.querySelector('hr')
-      hr?.classList.add('hidden')
+    const elements = document.querySelectorAll('h1, h2')
+    // .slice(2)は記事タイトルとメタデータを取り除くため
+    const targets = Array.from(elements).slice(2)
 
-      const elements = document.querySelectorAll('h1, h2')
-      // .slice(2)は記事タイトルとメタデータを取り除くため
-      const targets = Array.from(elements).slice(2)
-
-      targets.map((target) => {
-        target.id &&
-          setToc((prev) => [...prev, { id: target.id, tag: target.tagName }])
-      })
-    }
-    return () => {
-      ignore = true
-    }
+    targets.map((target) => {
+      if (target.id) {
+        setToc((prev) => [
+          // スプレッド構文のは重複排除
+          ...Array.from(new Map(prev.map((p) => [p.id, p])).values()),
+          { id: target.id, tag: target.tagName },
+        ])
+      }
+    })
   }, [])
+
+  useEffect(() => {
+    // mdxファイル内のメタデータ非表示
+    const meta = document.querySelector('h2')
+    meta?.classList.add('hidden')
+    // なんかいらない線表示されるから👇
+    const hr = document.querySelector('hr')
+    hr?.classList.add('hidden')
+  }, [darkMode])
 
   const handleOnClick = (t: Toc) => {
     const target = document.getElementById(t.id)
