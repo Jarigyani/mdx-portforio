@@ -24,7 +24,11 @@ const MDXComponents = () => {
       />
     ),
     h2: (props) => (
-      <h2 id={props.children} className="my-3 text-2xl" {...props} />
+      <h2
+        id={props.children}
+        className="scroll-mt-16 my-3 text-2xl"
+        {...props}
+      />
     ),
     h3: (props) => <h3 className="my-2 text-xl" {...props} />,
     table: (props) => (
