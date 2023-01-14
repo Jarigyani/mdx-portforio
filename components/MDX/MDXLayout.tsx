@@ -29,8 +29,11 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
       if (target.id) {
         setToc((prev) => [
           // スプレッド構文のは重複排除
-          ...Array.from(new Map(prev.map((p) => [p.id, p])).values()),
+          ...prev,
           { id: target.id, tag: target.tagName },
+        ])
+        setToc((prev) => [
+          ...Array.from(new Map(prev.map((p) => [p.id, p])).values()),
         ])
       }
     })
@@ -39,7 +42,7 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
   useEffect(() => {
     // mdxファイル内のメタデータ非表示
     const meta = document.querySelector('h2')
-    meta?.classList.add('hidden')
+    meta!.style.display = 'none'
     // なんかいらない線表示されるから👇
     const hr = document.querySelector('hr')
     hr?.classList.add('hidden')
