@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdContentCopy } from 'react-icons/md'
 import { useStore } from 'store'
 
@@ -6,6 +6,11 @@ const wpshell = () => {
   const [select, setSelect] = useState('g000c0000')
   const { darkMode, copy, changeCopy } = useStore()
   const [text, setText] = useState('')
+	const {setDnsName} = useStore()
+
+	useEffect(() => {
+		text ? setDnsName(text) : setDnsName(select)
+	}, [select, text]);
 
   const handleOnChange = (value) => {
     setText(value)

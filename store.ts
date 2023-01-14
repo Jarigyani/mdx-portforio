@@ -6,6 +6,9 @@ type Store = {
 
   darkMode: boolean
   changeDarkMode: () => void
+
+  dnsName: string
+  setDnsName: (text: string) => void
 }
 
 export const useStore = create<Store>((set) => ({
@@ -21,5 +24,12 @@ export const useStore = create<Store>((set) => ({
     set((state) => {
       return { darkMode: !state.darkMode }
     })
+  },
+
+  dnsName: '',
+  setDnsName: (text: string) => {
+    set(() => ({
+      dnsName: text,
+    }))
   },
 }))
