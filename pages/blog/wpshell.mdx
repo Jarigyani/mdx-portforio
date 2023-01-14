@@ -1,12 +1,14 @@
 ---
-title: Functions for Beginners
-date: 'August 4, 2021'
-description: Learn how to create and use functions
-thumbnailUrl: '/javascript-functions-thumbnail.jpeg'
-tags: ['functions', 'javascript']
+"filename": "wpshell"
+"title": "docker-compose + wordpress (CentOS7.9)"
+"date": "2023-01-14"
+"description": "docker-composeを使用してさくらのクラウドにwordpressサイトを構築する手順書です"
+"eyecatch": "/blog/wpshell/eyecatch-min.png"
+"tags": ["gakkou", "tech", "tutorils"]
 ---
 
 import MLayout from '@/MDX/MDXLayout'
+import Wpshell from '@/blog/Wpshell'
 
 # Create server 🍭
 まずはいつも通りcentos7.9でサーバーを作成してください
@@ -29,14 +31,13 @@ curl https://raw.githubusercontent.com/Jarigyani/weather-app/main/front/src/asse
 ```
 
 # 実行
-👇g000c0000を自分の学籍番号に書き換えて入力
+
+👇のセレクトボックスから自分の学籍番号を選択して、生成されたコマンドを実行してください
+
+<Wpshell />
 
 > 実行すると色々出ますが放置して次の手順に進んでください
 > 学籍番号等を間違えたまま実行してしまった場合はcontrol+cで一度停止して、再度修正したコマンドを実行してください
-
-``` shell
-bash ~/dcwp.sh g000c0000
-```
 
 # DNS setting ✈️
 先ほどのコマンドは完了まで時間がかかるのでその間にDNSレコードの設定をします

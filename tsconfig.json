@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.mdx",
-    "components/MDXComponents.js"
+    "components/MDXComponents.js",
+    "components/GetMeta.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -12,10 +12,10 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: '#4ade80',
+          primary: '#22d3ee',
           secondary: '#a78bfa',
           accent: '#f472b6',
-          neutral: '#22d3ee',
+          neutral: '#374151',
           'neutral-content': '#fff',
           'base-100': '#111827',
           'base-200': '#1f2937',
