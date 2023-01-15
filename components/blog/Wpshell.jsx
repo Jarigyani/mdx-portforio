@@ -1,3 +1,4 @@
+import PreCircle from '@/MDX/PreCircle'
 import { useEffect, useState } from 'react'
 import { MdContentCopy } from 'react-icons/md'
 import { useStore } from 'store'
@@ -6,11 +7,11 @@ const wpshell = () => {
   const [select, setSelect] = useState('g000c0000')
   const { darkMode, copy, changeCopy } = useStore()
   const [text, setText] = useState('')
-	const {setDnsName} = useStore()
+  const { setDnsName } = useStore()
 
-	useEffect(() => {
-		text ? setDnsName(text) : setDnsName(select)
-	}, [select, text]);
+  useEffect(() => {
+    text ? setDnsName(text) : setDnsName(select)
+  }, [select, text])
 
   const handleOnChange = (value) => {
     setText(value)
@@ -30,7 +31,7 @@ const wpshell = () => {
         defaultValue="g000c0000"
         onChange={(e) => {
           setSelect(e.target.value)
-					setText('')
+          setText('')
         }}
       >
         <option disabled>g000c0000</option>
@@ -64,7 +65,13 @@ const wpshell = () => {
           handleOnChange(e.target.value)
         }}
       />
-      <div className="rounded-md my-3 pt-5 relative bg-[#282a36] drop-shadow-md">
+      <div className="rounded-md my-3 pt-3 relative bg-[#282a36] drop-shadow-md">
+        <div className="ml-5 mt-2 flex gap-2">
+          <PreCircle color="r" />
+          <PreCircle color="y" />
+          <PreCircle color="g" />
+        </div>
+
         <div
           className={`tooltip tooltip-left absolute top-5 right-5 hover:opacity-80 tooltip-success`}
           data-tip={copy ? 'copied!' : 'copy'}

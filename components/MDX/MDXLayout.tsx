@@ -1,5 +1,5 @@
 import { ReactNode } from '@mdx-js/react/lib'
-import { motion } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -17,10 +17,14 @@ type Toc = {
 }
 
 const MDXLayout = ({ text, eyecatch, children }: Props) => {
+  const controls = useAnimationControls()
   const { darkMode } = useStore()
   const [toc, setToc] = useState<Toc[]>([])
 
   useEffect(() => {
+    const top = document.getElementById('forscroll')
+    top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
     const elements = document.querySelectorAll('h1, h2')
     // .slice(2)は記事タイトルとメタデータを取り除くため
     const targets = Array.from(elements).slice(2)
@@ -53,6 +57,10 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  const handleOnLoad = () => {
+    controls.start({ opacity: 1, y: 0 })
+  }
+
   return (
     <>
       <Head>
@@ -64,7 +72,7 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
       />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={controls}
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
         className="mx-auto mb-5 max-w-[1200px]"
@@ -79,6 +87,9 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
               alt="eyecatch image"
               className="rounded-md drop-shadow-md"
               priority
+              onLoad={() => {
+                handleOnLoad()
+              }}
             />
             {children}
           </div>

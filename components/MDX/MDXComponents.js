@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MdContentCopy } from 'react-icons/md'
 import { useStore } from 'store'
+import PreCircle from './PreCircle'
 
 const MDXComponents = () => {
   const darkMode = useStore((state) => state.darkMode)
@@ -56,7 +57,12 @@ const MDXComponents = () => {
       />
     ),
     pre: (props) => (
-      <div className="rounded-md my-3 pt-5 relative bg-[#282a36] drop-shadow-md">
+      <div className="rounded-md my-3 pt-3 relative bg-[#282a36] drop-shadow-md">
+        <div className="ml-5 mt-2 flex gap-2">
+          <PreCircle color="r" />
+          <PreCircle color="y" />
+          <PreCircle color="g" />
+        </div>
         <div
           className={`tooltip tooltip-left absolute top-5 right-5 hover:opacity-80 tooltip-success`}
           data-tip={copy ? 'copied!' : 'copy'}

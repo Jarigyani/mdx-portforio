@@ -2,6 +2,7 @@ import ArticleCard from '@/ArticleCard'
 import { motion } from 'framer-motion'
 import fs from 'fs'
 import matter from 'gray-matter'
+import { useEffect } from 'react'
 
 type Props = {
   posts: {
@@ -15,6 +16,11 @@ type Props = {
 }
 
 const index = ({ posts }: Props) => {
+  useEffect(() => {
+    const top = document.getElementById('forscroll')
+    top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
