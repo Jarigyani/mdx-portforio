@@ -1,7 +1,5 @@
 import Footer from '@/Footer'
-import MDXComponents from '@/MDX/MDXComponents'
 import Navbar from '@/Navbar'
-import { MDXProvider } from '@mdx-js/react'
 import { Noto_Serif_JP } from '@next/font/google'
 import { AnimatePresence } from 'framer-motion'
 import type { AppProps } from 'next/app'
@@ -16,7 +14,6 @@ const inter = Noto_Serif_JP({
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const darkMode = useStore((state) => state.darkMode)
-  const { components } = MDXComponents()
 
   return (
     <>
@@ -31,11 +28,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
           }
         `}</style>
         <Navbar />
-        <MDXProvider components={components}>
-          <AnimatePresence mode="wait">
-            <Component {...pageProps} key={router.asPath} />
-          </AnimatePresence>
-        </MDXProvider>
+        <AnimatePresence mode="wait">
+          <Component {...pageProps} key={router.asPath} />
+        </AnimatePresence>
       </div>
       <Footer />
     </>

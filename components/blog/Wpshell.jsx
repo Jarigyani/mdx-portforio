@@ -65,28 +65,25 @@ const wpshell = () => {
           handleOnChange(e.target.value)
         }}
       />
-      <div className="rounded-md my-3 pt-3 relative bg-[#282a36] drop-shadow-md">
-        <div className="ml-5 mt-2 flex gap-2">
+      <div className="rounded-md my-3 py-3 relative bg-base-200 drop-shadow-md">
+        <div className="ml-5 mt-2 flex gap-2 mb-2">
           <PreCircle color="r" />
           <PreCircle color="y" />
           <PreCircle color="g" />
         </div>
-
         <div
           className={`tooltip tooltip-left absolute top-5 right-5 hover:opacity-80 tooltip-success`}
           data-tip={copy ? 'copied!' : 'copy'}
           onClick={(e) => {
-            handleOnClick(e.currentTarget.nextElementSibling?.textContent)
+            handleOnClick(e.currentTarget.nextElementSibling.textContent)
           }}
         >
           <MdContentCopy
             className={`h-5 w-5 ${!darkMode && 'text-base-100'}`}
           />
         </div>
-        <pre className="language-shell">
-          <code className="language-shell">
-            bash ~/dcwp.sh {text ? text : select}
-          </code>
+        <pre className='ml-5'>
+          <code className='text-[#839496]'>bash <span className='text-[#2aa198]'>~/dcwp.sh</span> {text ? text : select}</code>
         </pre>
       </div>
     </>

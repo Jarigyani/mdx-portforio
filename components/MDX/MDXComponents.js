@@ -11,19 +11,20 @@ const MDXComponents = () => {
 
   const handleOnClick = (e) => {
     navigator.clipboard
-      // 改行入るから末尾一文字削除
-      .writeText(e.slice(0, -1))
+      .writeText(e)
       .then(changeCopy)
       .then(setTimeout(changeCopy, 2000))
   }
 
   const components = {
     h1: (props) => (
-      <h1
-        id={props.children}
-        className="scroll-mt-20 border-b-2 border-base-200 mt-8 mb-5 pb-2 text-3xl break-words"
-        {...props}
-      />
+      <>
+        <h1
+          id={props.children}
+          className="scroll-mt-20 border-b-2 border-base-200 mt-8 mb-5 pb-2 text-3xl break-words"
+          {...props}
+        />
+      </>
     ),
     h2: (props) => (
       <h2
@@ -58,8 +59,8 @@ const MDXComponents = () => {
       />
     ),
     pre: (props) => (
-      <div className="rounded-md my-3 pt-3 relative bg-[#282a36] drop-shadow-md">
-        <div className="ml-5 mt-2 flex gap-2">
+      <div className="rounded-md my-3 py-3 relative bg-base-200 drop-shadow-md">
+        <div className="ml-5 mt-2 flex gap-2 mb-2">
           <PreCircle color="r" />
           <PreCircle color="y" />
           <PreCircle color="g" />
@@ -75,10 +76,14 @@ const MDXComponents = () => {
             className={`h-5 w-5 ${!darkMode && 'text-base-100'}`}
           />
         </div>
-        <pre {...props} />
+        <pre className="ml-5 bg-base-200" {...props} />
       </div>
     ),
-    code: (props) => <code {...props} />,
+    code: (props) => (
+      <div className="overflow-x-scroll">
+        <code className="bg-base-200" {...props} />
+      </div>
+    ),
   }
 
   return { components }

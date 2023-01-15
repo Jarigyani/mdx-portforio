@@ -1,13 +1,18 @@
-import rehypePrism from '@mapbox/rehype-prism'
 import nextMdx from '@next/mdx'
+import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
+
+const options = {
+  // Use one of Shiki's packaged themes
+  theme: 'dracula-soft',
+}
 
 /** @type {import('next').NextConfig} */
 const withMDX = nextMdx({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
+    rehypePlugins: [[rehypePrettyCode, options]],
     providerImportSource: '@mdx-js/react',
   },
 })

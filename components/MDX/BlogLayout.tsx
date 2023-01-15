@@ -3,7 +3,6 @@ import { motion, useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useStore } from 'store'
 
 type Props = {
   text: string
@@ -16,9 +15,8 @@ type Toc = {
   tag: string
 }
 
-const MDXLayout = ({ text, eyecatch, children }: Props) => {
+const BlogLayout = ({ text, eyecatch, children }: Props) => {
   const controls = useAnimationControls()
-  const { darkMode } = useStore()
   const [toc, setToc] = useState<Toc[]>([])
 
   useEffect(() => {
@@ -27,8 +25,7 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
     top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
     const elements = document.querySelectorAll('h1, h2')
-    // .slice(2)は記事タイトルとメタデータを取り除くため
-    const targets = Array.from(elements).slice(2)
+    const targets = Array.from(elements)
 
     targets.map((target) => {
       if (target.id) {
@@ -43,15 +40,6 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
       }
     })
   }, [])
-
-  useEffect(() => {
-    // mdxファイル内のメタデータ非表示
-    const meta = document.querySelector('h2')
-    meta!.style.display = 'none'
-    // なんかいらない線表示されるから👇
-    const hr = document.querySelector('hr')
-    hr?.classList.add('hidden')
-  }, [darkMode])
 
   // 目次クリック時の処理
   const handleOnClick = (t: Toc) => {
@@ -69,10 +57,6 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
       <Head>
         <title>{text}</title>
       </Head>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
-      />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={controls}
@@ -112,4 +96,4 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
   )
 }
 
-export default MDXLayout
+export default BlogLayout
