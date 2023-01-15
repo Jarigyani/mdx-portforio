@@ -22,6 +22,7 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
   const [toc, setToc] = useState<Toc[]>([])
 
   useEffect(() => {
+    // 読み込み時トップにスクロール
     const top = document.getElementById('forscroll')
     top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
@@ -52,11 +53,13 @@ const MDXLayout = ({ text, eyecatch, children }: Props) => {
     hr?.classList.add('hidden')
   }, [darkMode])
 
+  // 目次クリック時の処理
   const handleOnClick = (t: Toc) => {
     const target = document.getElementById(t.id)
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  // アイキャッチが読み込まれてからアニメーション
   const handleOnLoad = () => {
     controls.start({ opacity: 1, y: 0 })
   }

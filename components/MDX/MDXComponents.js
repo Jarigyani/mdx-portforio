@@ -11,7 +11,8 @@ const MDXComponents = () => {
 
   const handleOnClick = (e) => {
     navigator.clipboard
-      .writeText(e)
+      // 改行入るから末尾一文字削除
+      .writeText(e.slice(0, -1))
       .then(changeCopy)
       .then(setTimeout(changeCopy, 2000))
   }
