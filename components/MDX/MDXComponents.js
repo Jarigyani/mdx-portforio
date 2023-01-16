@@ -59,7 +59,7 @@ const MDXComponents = () => {
       />
     ),
     pre: (props) => (
-      <div className="rounded-md my-3 py-3 relative bg-base-200 drop-shadow-md">
+      <div className="overflow-x-scroll rounded-md my-3 py-3 relative bg-base-200 drop-shadow-md">
         <div className="ml-5 mt-2 flex gap-2 mb-2">
           <PreCircle color="r" />
           <PreCircle color="y" />
@@ -79,11 +79,7 @@ const MDXComponents = () => {
         <pre className="ml-5 bg-base-200" {...props} />
       </div>
     ),
-    code: (props) => (
-      <div className="overflow-x-scroll">
-        <code className="bg-base-200" {...props} />
-      </div>
-    ),
+    code: (props) => <code className="bg-base-200" {...props} />,
   }
 
   return { components }
