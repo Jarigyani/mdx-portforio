@@ -71,13 +71,13 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
       >
         <div className="flex">
           <div className="p-5 w-full lg:w-[calc(100%_-_300px)]">
-            <h1 className="justify-center text-5xl mb-10">{text}</h1>
+            <h1 className="justify-center text-5xl mb-6">{text}</h1>
             <Image
               src={eyecatch}
               width={860}
               height={860}
               alt="eyecatch image"
-              className="rounded-md drop-shadow-md"
+              className="rounded-md drop-shadow-md mb-10"
               priority
               onLoad={() => {
                 handleOnLoad()

@@ -1,0 +1,48 @@
+---
+"filename": "vercel-ignore"
+"title": "Vercelで特定のブランチのみビルドしたい"
+"date": "2023-01-16"
+"description": ""
+"eyecatch": "/blog/vercel-ignore/eyecatch.png"
+"tags": ["tech", "tutorils"]
+---
+
+
+## Ignore build stepをプロジェクトルートに作成 🍙
+
+```shell
+#!/bin/bash
+
+echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
+
+if [[ "$VERCEL_GIT_COMMIT_REF" == "ビルドしたいブランチ名" ]] ; then
+  # Proceed with the build
+  echo "😘 - Build can proceed"
+  exit 1;
+
+else
+  # Don't build
+  echo "🥶 - Build cancelled"
+  exit 0;
+fi
+```
+
+## Vercelの設定 🍥
+
+Setting
+
+👇
+
+Git
+
+👇
+
+Ignore Build Step
+
+👇
+
+Commandに👇を入力
+
+```shell
+bash vercel-ignore-build-step.sh
+```
