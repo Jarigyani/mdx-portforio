@@ -19,7 +19,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <>
       <div
         id="forscroll"
-        className="min-h-screen w-screen scroll-mt-16"
+        className="scroll-mt-16"
         data-theme={darkMode ? `mytheme` : `light`}
       >
         <style jsx global>{`
@@ -27,12 +27,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
             font-family: ${inter.style.fontFamily}, serif;
           }
         `}</style>
-        <Navbar />
-        <AnimatePresence mode="wait">
-          <Component {...pageProps} key={router.asPath} />
-        </AnimatePresence>
+        <div className="min-h-screen">
+          <Navbar />
+          <AnimatePresence mode="wait">
+            <Component {...pageProps} key={router.asPath} />
+          </AnimatePresence>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }

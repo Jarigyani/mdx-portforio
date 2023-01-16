@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Navbar = () => {
   return (
     <>
-      <div className="navbar backdrop-blur-md bg-base-100/60 border-b border-base-200 top-0 sticky z-50 w-screen">
+      <div className="navbar backdrop-blur-md bg-base-100/60 border-b border-base-200 top-0 sticky z-50">
         <div className="flex-1">
           <Link
             href="/"

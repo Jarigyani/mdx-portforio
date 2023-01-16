@@ -27,6 +27,6 @@
     "components/MDXComponents.js",
     "components/GetMeta.js",
     "components/blog/Wpshell.jsx"
-  ],
+, "pages/blog/[filename].jsx", "pages/blog/[filename].jsx"  ],
   "exclude": ["node_modules"]
 }

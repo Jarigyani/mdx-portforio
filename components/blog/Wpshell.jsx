@@ -82,8 +82,8 @@ const wpshell = () => {
             className={`h-5 w-5 ${!darkMode && 'text-base-100'}`}
           />
         </div>
-        <div className="pt-3 pb-5 mr-5 overflow-x-scroll">
-        <pre className='ml-5 bg-base-200'>
+        <div className="pt-3">
+        <pre className='px-5 pb-5 bg-base-200 overflow-x-scroll'>
           <code className='text-[#ffc777]'>bash <span className='text-[#c3e88d]'>~/dcwp.sh</span> <span className='text-[#c3e88d]'>{text ? text : select}</span></code>
         </pre>
       </div></div>
