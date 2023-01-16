@@ -46,9 +46,7 @@ export const getStaticProps = async ({
 }) => {
   const options = {
     // Use one of Shiki's packaged themes
-    theme: JSON.parse(
-      fs.readFileSync(require.resolve('public/moonlight-ii.json'), 'utf-8')
-    ),
+    theme: JSON.parse(fs.readFileSync('public/moonlight-ii.json', 'utf-8')),
     keepBackground: false,
   }
 
