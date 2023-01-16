@@ -24,7 +24,8 @@ const index = ({ posts }: Props) => {
         transition={{ duration: 0.5 }}
         className="max-w-[1024px] mx-auto"
       >
-        <ul className="grid grid-cols-1 gap-6 sm:m-5 md:grid-cols-2 lg:grid-cols-3">
+        <h1 className="text-center my-5 text-6xl">Articles</h1>
+        <ul className="grid grid-cols-1 gap-6 my-5 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <ArticleCard meta={post.data} key={post.data.filename} />
           ))}
