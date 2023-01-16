@@ -42,8 +42,13 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
   }, [])
 
   // 目次クリック時の処理
-  const handleOnClick = (t: Toc) => {
-    const target = document.getElementById(t.id)
+  const handleOnClick = (t: string) => {
+    if (t === 'mokuji') {
+      const top = document.getElementById('forscroll')
+      top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    const target = document.getElementById(t)
     target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -81,11 +86,19 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
             {children}
           </div>
           <div className="hidden pl-5 sticky top-24 border-l-2 border-base-200 h-max lg:block w-[280px]">
-            <h4 className="mb-4 text-lg">目次👻</h4>
+            <button className="flex">
+              <h4
+                id="mokuji"
+                className="mb-4 text-lg"
+                onClick={(e) => handleOnClick(e.currentTarget.id)}
+              >
+                目次👻
+              </h4>
+            </button>
             <ul className="steps steps-vertical pl-5">
               {toc.map((t) => (
                 <li className="step" key={t.id}>
-                  <button onClick={() => handleOnClick(t)}>{t.id}</button>
+                  <button onClick={() => handleOnClick(t.id)}>{t.id}</button>
                 </li>
               ))}
             </ul>

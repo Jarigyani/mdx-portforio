@@ -19,7 +19,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <>
       <div
         id="forscroll"
-        className="min-h-screen w-screen scroll-mt-20"
+        className="min-h-screen w-screen scroll-mt-16"
         data-theme={darkMode ? `mytheme` : `light`}
       >
         <style jsx global>{`
