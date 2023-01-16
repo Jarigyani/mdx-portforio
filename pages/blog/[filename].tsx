@@ -28,10 +28,6 @@ const PostPage = ({ mdxSource, post }: Props) => {
   return (
     <>
       <BlogLayout text={post.data.title} eyecatch={post.data.eyecatch}>
-        {/* <link
-          rel="stylesheet"
-          href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
-        /> */}
         <MDXRemote
           compiledSource={post.content}
           components={mdxElement}

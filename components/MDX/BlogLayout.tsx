@@ -21,8 +21,8 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
 
   useEffect(() => {
     // 読み込み時トップにスクロール
-    const top = document.getElementById('forscroll')
-    top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // const top = document.getElementById('forscroll')
+    // top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
     const elements = document.querySelectorAll('h1, h2')
     const targets = Array.from(elements)
