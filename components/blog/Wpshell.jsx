@@ -65,14 +65,14 @@ const wpshell = () => {
           handleOnChange(e.target.value)
         }}
       />
-      <div className="rounded-md my-3 py-3 relative bg-base-200 drop-shadow-md">
-        <div className="ml-5 mt-2 flex gap-2 mb-2">
+      <div className="rounded-md my-3 relative bg-base-200 drop-shadow-md">
+        <div className="ml-5 pt-5 flex gap-2 mb-2">
           <PreCircle color="r" />
           <PreCircle color="y" />
           <PreCircle color="g" />
         </div>
         <div
-          className={`tooltip tooltip-left absolute top-5 right-5 hover:opacity-80 tooltip-success`}
+          className={`tooltip tooltip-left absolute top-4 right-5 hover:opacity-80 tooltip-success`}
           data-tip={copy ? 'copied!' : 'copy'}
           onClick={(e) => {
             handleOnClick(e.currentTarget.nextElementSibling.textContent)
@@ -82,10 +82,11 @@ const wpshell = () => {
             className={`h-5 w-5 ${!darkMode && 'text-base-100'}`}
           />
         </div>
-        <pre className='ml-5'>
-          <code className='text-[#839496]'>bash <span className='text-[#2aa198]'>~/dcwp.sh</span> {text ? text : select}</code>
+        <div className="pt-3 pb-5 mr-5 overflow-x-scroll">
+        <pre className='ml-5 bg-base-200'>
+          <code className='text-[#ffc777]'>bash <span className='text-[#c3e88d]'>~/dcwp.sh</span> <span className='text-[#c3e88d]'>{text ? text : select}</span></code>
         </pre>
-      </div>
+      </div></div>
     </>
   )
 }

@@ -1,4 +1,5 @@
 import BlogLayout from '@/MDX/BlogLayout'
+import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -45,7 +46,9 @@ export const getStaticProps = async ({
 }) => {
   const options = {
     // Use one of Shiki's packaged themes
-    theme: 'solarized-dark',
+    theme: JSON.parse(
+      fs.readFileSync(require.resolve('public/moonlight-ii.json'), 'utf-8')
+    ),
     keepBackground: false,
   }
 
