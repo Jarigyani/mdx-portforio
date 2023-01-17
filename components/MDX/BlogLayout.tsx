@@ -3,6 +3,7 @@ import { motion, useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useStore } from 'store'
 
 type Props = {
   text: string
@@ -16,6 +17,7 @@ type Toc = {
 }
 
 const BlogLayout = ({ text, eyecatch, children }: Props) => {
+  const { darkMode } = useStore()
   const controls = useAnimationControls()
   const [toc, setToc] = useState<Toc[]>([])
 
@@ -26,7 +28,6 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
 
     const elements = document.querySelectorAll('h2, h3')
     const targets = Array.from(elements)
-    console.log(targets)
 
     targets.map((target) => {
       target.id = target.innerHTML
@@ -41,7 +42,7 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
         ])
       }
     })
-  }, [])
+  }, [darkMode])
 
   // 目次クリック時の処理
   const handleOnClick = (t: string) => {
@@ -109,7 +110,7 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
                   )
                 } else {
                   return (
-                    <ul>
+                    <ul key={t.id}>
                       <li className="list-disc opacity-80 ml-3">
                         <button onClick={() => handleOnClick(t.id)}>
                           {t.id}

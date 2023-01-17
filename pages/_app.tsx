@@ -20,13 +20,15 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <div
         id="forscroll"
         className="scroll-mt-16"
-        data-theme={darkMode ? `mytheme` : `light`}
+        data-theme={darkMode ? `mytheme` : `mytheme2`}
       >
-        <style jsx global>{`
-          html {
-            font-family: ${inter.style.fontFamily}, serif;
-          }
-        `}</style>
+        <style jsx global>
+          {`
+            html {
+              font-family: ${inter.style.fontFamily}, serif;
+            }
+          `}
+        </style>
         <div className="min-h-screen">
           <Navbar />
           <AnimatePresence mode="wait">
