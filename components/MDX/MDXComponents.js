@@ -29,29 +29,24 @@ const MDXComponents = () => {
     h2: (props) => (
       <h2
         id={props.children}
-        className="scroll-mt-16 my-3 text-2xl border-b-2 border-base-200 pb-2 break-words"
+        className="scroll-mt-16 mt-5 mb-3 text-2xl border-b-2 border-base-200 pb-2 break-words"
         {...props}
       />
     ),
     h3: (props) => <h3 className="my-2 text-xl scroll-mt-16" {...props} />,
     table: (props) => (
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto my-5">
         <table
-          className="drop-shadow-md overflow-auto table my-3 text-center"
+          className="drop-shadow-md overflow-auto table text-center"
           {...props}
         />
       </div>
     ),
     a: (props) => <Link className="hover:underline" {...props} />,
-    blockquote: (props) => (
-      <div className="prose max-w-none drop-shadow-md">
-        <blockquote className="opacity-80" {...props} />
-      </div>
-    ),
     p: (props) => <p {...props} />,
     img: (props) => (
       <Image
-        className="rounded-md drop-shadow-md mx-auto my-3"
+        className="rounded-md drop-shadow-md mx-auto my-5"
         width={860}
         height={860}
         alt=""
@@ -82,6 +77,12 @@ const MDXComponents = () => {
       </div>
     ),
     code: (props) => <code className="bg-base-200" {...props} />,
+    blockquote: (props) => (
+      <blockquote
+        className="opacity-80 border-l-4 border-base-300 my-2 pl-2"
+        {...props}
+      />
+    ),
   }
 
   return { components }
