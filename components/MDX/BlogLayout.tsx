@@ -24,10 +24,12 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
     // const top = document.getElementById('forscroll')
     // top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-    const elements = document.querySelectorAll('h1, h2, h3')
+    const elements = document.querySelectorAll('h2, h3')
     const targets = Array.from(elements)
+    console.log(targets)
 
     targets.map((target) => {
+      target.id = target.innerHTML
       if (target.id) {
         setToc((prev) => [
           // スプレッド構文のは重複排除
@@ -89,18 +91,34 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
             <button className="flex">
               <h4
                 id="mokuji"
-                className="mb-4 text-lg"
+                className="text-lg mb-2"
                 onClick={(e) => handleOnClick(e.currentTarget.id)}
               >
                 目次👻
               </h4>
             </button>
             <ul className="steps steps-vertical pl-5">
-              {toc.map((t) => (
-                <li className="step" key={t.id}>
-                  <button onClick={() => handleOnClick(t.id)}>{t.id}</button>
-                </li>
-              ))}
+              {toc.map((t) => {
+                if (t.tag === 'H2') {
+                  return (
+                    <li className="" key={t.id}>
+                      <button onClick={() => handleOnClick(t.id)}>
+                        {t.id}
+                      </button>
+                    </li>
+                  )
+                } else {
+                  return (
+                    <ul>
+                      <li className="opacity-80 ml-3">
+                        <button onClick={() => handleOnClick(t.id)}>
+                          {t.id}
+                        </button>
+                      </li>
+                    </ul>
+                  )
+                }
+              })}
             </ul>
           </div>
         </div>

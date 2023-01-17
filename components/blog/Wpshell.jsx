@@ -83,10 +83,14 @@ const wpshell = () => {
           />
         </div>
         <div className="pt-3">
-        <pre className='px-5 pb-5 bg-base-200 overflow-x-scroll'>
-          <code className='text-[#ffc777]'>bash <span className='text-[#c3e88d]'>~/dcwp.sh</span> <span className='text-[#c3e88d]'>{text ? text : select}</span></code>
-        </pre>
-      </div></div>
+          <pre className="px-5 pb-5 bg-base-200 overflow-x-scroll">
+            <code className="text-[#ffc777]">
+              bash <span className="text-[#c3e88d]">~/dcwp.sh</span>{' '}
+              <span className="text-[#c3e88d]">{text ? text : select}</span>
+            </code>
+          </pre>
+        </div>
+      </div>
     </>
   )
 }

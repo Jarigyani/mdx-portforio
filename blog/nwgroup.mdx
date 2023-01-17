@@ -17,6 +17,29 @@ en
 conf t
 no ip domain lookup
 hostname T-E-AS
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.1 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 10
@@ -35,7 +58,8 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 10
+switchport trunk allowed vlan 1,10
+switchport trunk native vlan 1
 exit
 
 ! 保存
@@ -51,6 +75,29 @@ en
 conf t
 no ip domain lookup
 hostname T-G-AS
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.2 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 20
@@ -69,7 +116,8 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 20
+switchport trunk allowed vlan 1,20
+switchport trunk native vlan 1
 exit
 
 ! 保存
@@ -85,6 +133,29 @@ en
 conf t
 no ip domain lookup
 hostname T-S-AS
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.3 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 30
@@ -103,7 +174,8 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 30
+switchport trunk allowed vlan 1,30
+switchport trunk native vlan 1
 exit
 
 ! 保存
@@ -119,6 +191,29 @@ en
 conf t
 no ip domain lookup
 hostname T-FS1
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.4 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 10
@@ -140,22 +235,26 @@ spanning-tree vlan 30 priority 4096
 ! インターフェース設定
 int range f0/1-4
 switchport mode trunk
-switchport trunk allowed vlan 10
+switchport trunk allowed vlan 1,10
+switchport trunk native vlan 1
 exit
 
 int range f0/5-9
 switchport mode trunk
-switchport trunk allowed vlan 20
+switchport trunk allowed vlan 1,20
+switchport trunk native vlan 1
 exit
 
 int range f0/10
 switchport mode trunk
-switchport trunk allowed vlan 30
+switchport trunk allowed vlan 1,30
+switchport trunk native vlan 1
 exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 10,20,30
+switchport trunk allowed vlan 1,10,20,30
+switchport trunk native vlan 1
 exit
 
 ! 保存
@@ -171,6 +270,29 @@ en
 conf t
 no ip domain lookup
 hostname T-FS2
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.5 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 10
@@ -190,22 +312,26 @@ spanning-tree vlan 30 priority 8192
 ! インターフェース設定
 int range f0/1-4
 switchport mode trunk
-switchport trunk allowed vlan 10
+switchport trunk allowed vlan 1,10
+switchport trunk native vlan 1
 exit
 
 int rnge f0/5-9
 switchport mode trunk
-switchport trunk allowed vlan 20
+switchport trunk allowed vlan 1,20
+switchport trunk native vlan 1
 exit
 
 int range f0/10
 switchport mode trunk
-switchport trunk allowed vlan 30
+switchport trunk allowed vlan 1,30
+switchport trunk native vlan 1
 exit
 
 int range f0/23-24
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30
+switchport trunk native vlan 1
 exit
 
 ! 保存
@@ -225,6 +351,29 @@ no ip domain lookup
 service dhcp
 ip routing
 hostname T-L3S1
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.6 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 10
@@ -236,7 +385,8 @@ exit
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 10,20,30
+switchport trunk allowed vlan 1,10,20,30
+switchport trunk native vlan 1
 no shut
 exit
 
@@ -333,6 +483,29 @@ no ip domain lookup
 service dhcp
 ip routing
 hostname T-L3S2
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.7 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 10
@@ -345,6 +518,7 @@ int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30
+switchport trunk native vlan 1
 no shut
 
 int range f0/2-11
@@ -440,6 +614,29 @@ no ip domain lookup
 service dhcp
 ip routing
 hostname O-L3S1
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.8 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 50
@@ -449,7 +646,8 @@ exit
 int range f0/1-4
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 50
+switchport trunk allowed vlan 1,50
+switchport trunk native vlan 1
 no shut
 exit
 
@@ -497,6 +695,29 @@ no ip domain lookup
 service dhcp
 ip routing
 hostname O-L3S2
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.9 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 50
@@ -506,7 +727,8 @@ exit
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 50
+switchport trunk allowed vlan 1,50
+switchport trunk native vlan 1
 no shut
 
 int f0/23
@@ -548,6 +770,29 @@ en
 conf t
 no ip domain lookup
 hostname O-E-AS
+username user01 password user01
+enable secret enable
+
+! vty
+line vty 0 4
+login local
+exec-timeout 0 10
+exit
+
+! ssh
+ip domain-name example.jp
+crypto key generate rsa
+2048
+ip ssh version 2
+line vty 0 4
+transport input ssh
+exit
+
+! 管理IPアドレス設定
+int vlan1
+ip address 10.1.0.10 255.255.0.0
+no shutdown
+exit
 
 ! vlan作成
 vlan 50
@@ -566,7 +811,8 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 50
+switchport trunk allowed vlan 1,50
+switchport trunk native vlan 1
 exit
 
 ! 保存
