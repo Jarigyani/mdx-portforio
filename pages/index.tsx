@@ -26,9 +26,11 @@ const index = ({ posts }: Props) => {
       >
         <h1 className="text-center my-5 text-6xl">Articles</h1>
         <ul className="grid grid-cols-1 gap-6 my-5 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <ArticleCard meta={post.data} key={post.data.filename} />
-          ))}
+          {posts.map((post) => {
+            if (!post.data.tags.includes('gakkou')) {
+              return <ArticleCard meta={post.data} key={post.data.filename} />
+            }
+          })}
         </ul>
       </motion.div>
     </>
