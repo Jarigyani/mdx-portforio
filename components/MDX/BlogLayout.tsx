@@ -24,7 +24,7 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
     // const top = document.getElementById('forscroll')
     // top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-    const elements = document.querySelectorAll('h1, h2')
+    const elements = document.querySelectorAll('h1, h2, h3')
     const targets = Array.from(elements)
 
     targets.map((target) => {

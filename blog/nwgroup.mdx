@@ -1,0 +1,575 @@
+---
+"filename": "nwgroup"
+"title": "NWGroup PacketTracerコマンド"
+"date": "2023-01-17"
+"description": ""
+"eyecatch": "/blog/nwgroup/eyecatch.png"
+"tags": ["gakkou", "tech", "tutorils"]
+---
+
+## 東京1F
+
+### T-E-AS
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname T-E-AS
+
+! vlan作成
+vlan 10
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10
+spanning-tree vlan 10 priority 0
+
+! インターフェース設定
+int range f0/1-2
+switchport mode access
+switchport access vlan 10
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 10
+exit
+
+! 保存
+end
+wr
+```
+
+### T-G-AS
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname T-G-AS
+
+! vlan作成
+vlan 20
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 20
+spanning-tree vlan 20 priority 0
+
+! インターフェース設定
+int range f0/1-2
+switchport mode access
+switchport access vlan 20
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 20
+exit
+
+! 保存
+end
+wr
+```
+
+### T-S-AS
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname T-S-AS
+
+! vlan作成
+vlan 30
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 30
+spanning-tree vlan 30 priority 0
+
+! インターフェース設定
+int range f0/1-2
+switchport mode access
+switchport access vlan 30
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 30
+exit
+
+! 保存
+end
+wr
+```
+
+### T-FS1
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname T-FS1
+
+! vlan作成
+vlan 10
+vlan 20
+vlan 30
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10
+spanning-tree vlan 10 priority 4096
+
+spanning-tree vlan 20
+spanning-tree vlan 20 priority 4096
+
+spanning-tree vlan 30
+spanning-tree vlan 30 priority 4096
+
+! インターフェース設定
+int range f0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 10
+exit
+
+int range f0/5-9
+switchport mode trunk
+switchport trunk allowed vlan 20
+exit
+
+int range f0/10
+switchport mode trunk
+switchport trunk allowed vlan 30
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+exit
+
+! 保存
+end
+wr
+```
+
+### T-FS2
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname T-FS2
+
+! vlan作成
+vlan 10
+vlan 20
+vlan 30
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10
+spanning-tree vlan 10 priority 8192
+spanning-tree vlan 20
+spanning-tree vlan 20 priority 8192
+spanning-tree vlan 30
+spanning-tree vlan 30 priority 8192
+
+! インターフェース設定
+int range f0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 10
+exit
+
+int rnge f0/5-9
+switchport mode trunk
+switchport trunk allowed vlan 20
+exit
+
+int range f0/10
+switchport mode trunk
+switchport trunk allowed vlan 30
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+exit
+
+! 保存
+end
+wr
+```
+
+## 東京2F
+
+### T-L3S1
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+service dhcp
+ip routing
+hostname T-L3S1
+
+! vlan作成
+vlan 10
+vlan 20
+vlan 30
+exit
+
+! インターフェース設定
+int f0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+no shut
+exit
+
+int range f0/2-11
+no shut
+exit
+
+int f0/23
+no switchport
+ip add 10.60.0.1 255.255.0.0
+no shut
+
+int f0/24
+no switchport
+ip add 10.80.0.1 255.255.0.0
+no shut
+
+int vlan 10
+ip address 10.10.255.252 255.255.0.0
+standby 10 ip 10.10.255.254
+standby 10 priority 105
+standby 10 preempt
+standby 10 track FastEthernet0/23
+standby 10 track FastEthernet0/24
+exit
+
+int vlan 20
+ip address 10.20.255.252 255.255.0.0
+standby 20 ip 10.20.255.254
+standby 20 priority 105
+standby 20 preempt
+standby 20 track FastEthernet0/23
+standby 20 track FastEthernet0/24
+exit
+
+int vlan 30
+ip address 10.30.255.252 255.255.0.0
+standby 30 ip 10.30.255.254
+standby 30 priority 105
+standby 30 preempt
+standby 30 track FastEthernet0/23
+standby 30 track FastEthernet0/24
+exit
+
+! DHCP設定
+ip dhcp excluded-address 10.10.255.252 10.10.255.254
+
+ip dhcp excluded-address 10.20.255.252 10.20.255.254
+
+ip dhcp excluded-address 10.30.255.252 10.30.255.254
+
+ip dhcp excluded-address 10.50.255.252 10.50.255.254
+
+ip dhcp pool V10
+network 10.10.0.0 255.255.0.0
+default-router 10.10.255.254
+exit
+
+ip dhcp pool V20
+network 10.20.0.0 255.255.0.0
+default-router 10.20.255.254
+exit
+
+ip dhcp pool V30
+network 10.30.0.0 255.255.0.0
+default-router 10.30.255.254
+exit
+
+ip dhcp pool V50
+network 10.50.0.0 255.255.0.0
+default-router 10.50.255.254
+exit
+
+! OSPF設定
+router ospf 1
+network 10.10.0.0 0.0.255.255 area 0
+network 10.20.0.0 0.0.255.255 area 0
+network 10.30.0.0 0.0.255.255 area 0
+network 10.60.0.0 0.0.255.255 area 0
+network 10.80.0.0 0.0.255.255 area 0
+exit
+
+! 保存
+end
+wr
+```
+
+### T-L3S2
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+service dhcp
+ip routing
+hostname T-L3S2
+
+! vlan作成
+vlan 10
+vlan 20
+vlan 30
+exit
+
+! インターフェース設定
+int f0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30
+no shut
+
+int range f0/2-11
+no shut
+exit
+
+int f0/23
+no switchport
+ip add 10.70.0.1 255.255.0.0
+no shut
+
+int f0/24
+no switchport
+ip add 10.80.0.2 255.255.0.0
+no shut
+
+int vlan 10
+ip address 10.10.255.253 255.255.0.0
+standby 10 ip 10.10.255.254
+standby 10 preempt
+standby 10 track FastEthernet0/23
+standby 10 track FastEthernet0/24
+exit
+
+int vlan 20
+ip address 10.20.255.253 255.255.0.0
+standby 20 ip 10.20.255.254
+standby 20 preempt
+standby 20 track FastEthernet0/23
+standby 20 track FastEthernet0/24
+exit
+
+int vlan 30
+ip address 10.30.255.253 255.255.0.0
+standby 30 ip 10.30.255.254
+standby 30 preempt
+standby 30 track FastEthernet0/23
+standby 30 track FastEthernet0/24
+exit
+
+! DHCP設定
+ip dhcp excluded-address 10.10.255.252 10.10.255.254
+
+ip dhcp excluded-address 10.20.255.252 10.20.255.254
+
+ip dhcp excluded-address 10.30.255.252 10.30.255.254
+
+ip dhcp excluded-address 10.50.255.252 10.50.255.254
+
+ip dhcp pool V10
+network 10.10.0.0 255.255.0.0
+default-router 10.10.255.254
+exit
+
+ip dhcp pool V20
+network 10.20.0.0 255.255.0.0
+default-router 10.20.255.254
+exit
+
+ip dhcp pool V30
+network 10.30.0.0 255.255.0.0
+default-router 10.30.255.254
+exit
+
+ip dhcp pool V50
+network 10.50.0.0 255.255.0.0
+default-router 10.50.255.254
+exit
+
+! OSPF設定
+router ospf 1
+network 10.10.0.0 0.0.255.255 area 0
+network 10.20.0.0 0.0.255.255 area 0
+network 10.30.0.0 0.0.255.255 area 0
+network 10.70.0.0 0.0.255.255 area 0
+network 10.80.0.0 0.0.255.255 area 0
+exit
+
+! 保存
+end
+wr
+```
+
+## 大阪
+
+### O-L3S1
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+service dhcp
+ip routing
+hostname O-L3S1
+
+! vlan作成
+vlan 50
+exit
+
+! インターフェース設定
+int range f0/1-4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 50
+no shut
+exit
+
+int f0/23
+no switchport
+ip add 10.60.0.2 255.255.0.0
+no shut
+exit
+
+int f0/24
+no switchport
+ip add 10.90.0.1 255.255.0.0
+no shut
+exit
+
+int vlan 50
+ip address 10.50.255.252 255.255.0.0
+ip helper-address 10.60.0.1
+standby 50 ip 10.50.255.254
+standby 50 priority 105
+standby 50 preempt
+standby 50 track FastEthernet0/23
+standby 50 track FastEthernet0/24
+exit
+
+! OSPF設定
+router ospf 1
+network 10.50.0.0 0.0.255.255 area 0
+network 10.60.0.0 0.0.255.255 area 0
+network 10.90.0.0 0.0.255.255 area 0
+exit
+
+! 保存
+end
+wr
+```
+
+### O-L3S2
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+service dhcp
+ip routing
+hostname O-L3S2
+
+! vlan作成
+vlan 50
+exit
+
+! インターフェース設定
+int f0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 50
+no shut
+
+int f0/23
+no switchport
+ip add 10.70.0.2 255.255.0.0
+no shut
+exit
+
+int f0/24
+no switchport
+ip add 10.90.0.2 255.255.0.0
+no shut
+exit
+
+int vlan 50
+ip address 10.50.255.253 255.255.0.0
+ip helper-address 10.70.0.1
+standby 50 ip 10.50.255.254
+standby 50 preempt
+standby 50 track FastEthernet0/23
+standby 50 track FastEthernet0/24
+
+! OSPF設定
+router ospf 1
+network 10.50.0.0 0.0.255.255 area 0
+network 10.70.0.0 0.0.255.255 area 0
+network 10.90.0.0 0.0.255.255 area 0
+
+! 保存
+end
+wr
+```
+
+### O-E-AS
+
+```bash
+! 初期設定
+en
+conf t
+no ip domain lookup
+hostname O-E-AS
+
+! vlan作成
+vlan 50
+exit
+
+! スパニングツリー設定
+spanning-tree mode rapid-pvst
+spanning-tree vlan 50
+spanning-tree vlan 50 priority 0
+
+! インターフェース設定
+int range f0/1-2
+switchport mode access
+switchport access vlan 50
+exit
+
+int range f0/23-24
+switchport mode trunk
+switchport trunk allowed vlan 50
+exit
+
+! 保存
+end
+wr
+```
