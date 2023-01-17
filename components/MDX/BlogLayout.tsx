@@ -101,7 +101,7 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
               {toc.map((t) => {
                 if (t.tag === 'H2') {
                   return (
-                    <li className="" key={t.id}>
+                    <li className="list-decimal" key={t.id}>
                       <button onClick={() => handleOnClick(t.id)}>
                         {t.id}
                       </button>
@@ -110,7 +110,7 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
                 } else {
                   return (
                     <ul>
-                      <li className="opacity-80 ml-3">
+                      <li className="list-disc opacity-80 ml-3">
                         <button onClick={() => handleOnClick(t.id)}>
                           {t.id}
                         </button>
