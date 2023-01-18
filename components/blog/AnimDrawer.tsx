@@ -43,7 +43,7 @@ const AnimDrawer = () => {
         }`}
       >
         <h3 className="mt-20 text-4xl font-semibold text-white">
-          I am a sidebar
+          I am a Drawer
         </h3>
       </div>
     </>

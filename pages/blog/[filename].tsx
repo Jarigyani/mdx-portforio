@@ -2,6 +2,7 @@ import BlogLayout from '@/MDX/BlogLayout'
 import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
+import { useEffect } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 import AnimDrawer from '../../components/blog/AnimDrawer'
@@ -21,6 +22,11 @@ type Props = {
 }
 
 const PostPage = ({ mdxSource, post }: Props) => {
+  useEffect(() => {
+    const top = document.getElementById('forscroll')
+    top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
   const components = MDXComponents().components
   const mdxElement = {
     Wpshell,

@@ -2,15 +2,16 @@ import ArticleCard from '@/ArticleCard'
 import GetAllPosts from '@/MDX/GetAllPosts'
 import { motion } from 'framer-motion'
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { Post } from 'types/types'
 
 type Props = { posts: Post[] }
 
 const index = ({ posts }: Props) => {
-  // useEffect(() => {
-  //   const top = document.getElementById('forscroll')
-  //   top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  // }, [])
+  useEffect(() => {
+    const top = document.getElementById('forscroll')
+    top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
 
   return (
     <>

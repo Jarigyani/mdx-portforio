@@ -18,7 +18,6 @@ const withMDX = nextMdx({
 })
 
 const nextConfig = {
-  experimental: { scrollRestoration: true },
   reactStrictMode: true,
   swcMinify: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
