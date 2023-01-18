@@ -1,6 +1,5 @@
 import ArticleCard from '@/ArticleCard'
 import GetAllPosts from '@/MDX/GetAllPosts'
-import { motion } from 'framer-motion'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { Post } from 'types/types'
@@ -18,13 +17,7 @@ const index = ({ posts }: Props) => {
       <Head>
         <title>Jarigyani</title>
       </Head>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-[1024px] mx-auto"
-      >
+      <div className="max-w-[1024px] mx-auto">
         <h1 className="text-center mt-5 mb-7 text-6xl">Articles</h1>
         <ul className="grid grid-cols-1 gap-6 my-5 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => {
@@ -33,7 +26,7 @@ const index = ({ posts }: Props) => {
             }
           })}
         </ul>
-      </motion.div>
+      </div>
     </>
   )
 }

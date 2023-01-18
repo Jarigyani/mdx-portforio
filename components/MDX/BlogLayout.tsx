@@ -1,6 +1,6 @@
 import Toc from '@/Toc'
 import { ReactNode } from '@mdx-js/react/lib'
-import { motion, useAnimationControls } from 'framer-motion'
+import { useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -23,13 +23,7 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
       <Head>
         <title>{text}</title>
       </Head>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={controls}
-        exit={{ opacity: 0, y: 50 }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto mb-5 max-w-[1200px]"
-      >
+      <div className="mx-auto mb-5 max-w-[1200px]">
         <div className="flex">
           <div className="p-2 md:p-5 w-full lg:w-[calc(100%_-_300px)]">
             <div className="relative">
@@ -58,7 +52,7 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
             <Toc />
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   )
 }

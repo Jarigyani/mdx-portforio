@@ -1,7 +1,7 @@
 import Footer from '@/Footer'
 import Navbar from '@/Navbar'
 import { Noto_Serif_JP } from '@next/font/google'
-import { AnimatePresence } from 'framer-motion'
+import NextProgress from 'next-progress'
 import type { AppProps } from 'next/app'
 import { useStore } from 'store'
 import '../styles/globals.css'
@@ -29,11 +29,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
             }
           `}
         </style>
+        <NextProgress options={{ showSpinner: false }} />
         <div className="min-h-screen">
           <Navbar />
-          <AnimatePresence mode="wait">
-            <Component {...pageProps} key={router.asPath} />
-          </AnimatePresence>
+          <Component {...pageProps} key={router.asPath} />
         </div>
         <Footer />
       </div>
