@@ -42,7 +42,7 @@ const MDXComponents = () => {
         />
       </div>
     ),
-    a: (props) => <Link className="hover:underline" {...props} />,
+    a: (props) => <Link {...props} />,
     p: (props) => <p {...props} />,
     img: (props) => (
       <Image
