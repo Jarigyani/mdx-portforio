@@ -45,18 +45,23 @@ const Toc = () => {
       <button className="flex">
         <h4
           id="mokuji"
-          className="text-lg mb-2"
+          className="text-xl mb-4"
           onClick={(e) => handleOnClick(e.currentTarget.id)}
         >
           目次👻
         </h4>
       </button>
-      <ul className="steps steps-vertical pl-5">
+      <ul className="steps steps-vertical pl-7 gap-2">
         {toc.map((t) => {
           if (t.tag === 'H2') {
             return (
               <li className="list-decimal" key={t.id}>
-                <button onClick={() => handleOnClick(t.id)}>{t.id}</button>
+                <label
+                  className="cursor-pointer"
+                  onClick={() => handleOnClick(t.id)}
+                >
+                  {t.id}
+                </label>
               </li>
             )
           } else {

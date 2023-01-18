@@ -7,10 +7,11 @@ import Image from 'next/image'
 type Props = {
   text: string
   eyecatch: string
+  date: string
   children: ReactNode
 }
 
-const BlogLayout = ({ text, eyecatch, children }: Props) => {
+const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
   const controls = useAnimationControls()
   // アイキャッチが読み込まれてからアニメーション
   const handleOnLoad = () => {
@@ -31,18 +32,26 @@ const BlogLayout = ({ text, eyecatch, children }: Props) => {
       >
         <div className="flex">
           <div className="p-2 md:p-5 w-full lg:w-[calc(100%_-_300px)]">
-            <h1 className="justify-center text-3xl md:text-5xl mb-6">{text}</h1>
-            <Image
-              src={eyecatch}
-              width={860}
-              height={860}
-              alt="eyecatch image"
-              className="rounded-md drop-shadow-md mb-10"
-              priority
-              onLoad={() => {
-                handleOnLoad()
-              }}
-            />
+            <div className="relative">
+              <Image
+                src={eyecatch}
+                width={860}
+                height={860}
+                alt="eyecatch image"
+                className="rounded-md drop-shadow-md mb-10"
+                priority
+                onLoad={() => {
+                  handleOnLoad()
+                }}
+              />
+              <div className="absolute top-0 left-0 h-full w-full bg-base-100 opacity-80" />
+              <h1 className="absolute top-1/2 -translate-y-1/2 w-full justify-center text-xl md:text-4xl mb-6 text-center">
+                {text}
+              </h1>
+              <label className="opacity-80 absolute text-xs bottom-1 right-1 md:bottom-5 md:right-5">
+                Published at {date}
+              </label>
+            </div>
             {children}
           </div>
           <div className="hidden pl-5 sticky top-24 border-l-2 border-base-200 h-max lg:block w-[280px]">

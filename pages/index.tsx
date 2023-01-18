@@ -25,7 +25,7 @@ const index = ({ posts }: Props) => {
         transition={{ duration: 0.5 }}
         className="max-w-[1024px] mx-auto"
       >
-        <h1 className="text-center my-5 text-6xl">Articles</h1>
+        <h1 className="text-center mt-5 mb-7 text-6xl">Articles</h1>
         <ul className="grid grid-cols-1 gap-6 my-5 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => {
             if (!post.data.tags.includes('gakkou')) {

@@ -28,8 +28,13 @@ const ArticleCard = ({ meta }: Props) => {
         <div className="card-body h-52">
           <h2 className="card-title text-lg">{meta.title}</h2>
           <p className="text-xs">{meta.description}</p>
-          <div className="card-actions justify-end">
-            <button className="btn-primary btn bottom-3"> Read Now</button>
+          <div className="card-actions justify-end relative">
+            <div className="absolute bottom-0 left-0">
+              <label className="underline bottom-0 opacity-80 text-md">
+                {meta.date}
+              </label>
+            </div>
+            <button className="btn-primary btn bottom-3">Read Now</button>
           </div>
         </div>
       </div>

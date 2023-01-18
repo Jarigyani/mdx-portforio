@@ -37,7 +37,11 @@ const PostPage = ({ mdxSource, post }: Props) => {
 
   return (
     <>
-      <BlogLayout text={post.data.title} eyecatch={post.data.eyecatch}>
+      <BlogLayout
+        date={post.data.date}
+        text={post.data.title}
+        eyecatch={post.data.eyecatch}
+      >
         <MDXRemote
           compiledSource={post.content}
           components={mdxElement}
