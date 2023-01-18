@@ -1,6 +1,5 @@
 import Toc from '@/Toc'
 import { ReactNode } from '@mdx-js/react/lib'
-import { useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -12,12 +11,6 @@ type Props = {
 }
 
 const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
-  const controls = useAnimationControls()
-  // アイキャッチが読み込まれてからアニメーション
-  const handleOnLoad = () => {
-    controls.start({ opacity: 1, y: 0 })
-  }
-
   return (
     <>
       <Head>
@@ -34,9 +27,6 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
                 alt="eyecatch image"
                 className="rounded-md drop-shadow-md mb-10"
                 priority
-                onLoad={() => {
-                  handleOnLoad()
-                }}
               />
               <div className="absolute top-0 left-0 h-full w-full bg-base-100 opacity-80" />
               <h1 className="absolute top-1/2 -translate-y-1/2 w-full justify-center text-xl md:text-4xl mb-6 text-center">
