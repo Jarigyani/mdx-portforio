@@ -3,7 +3,6 @@ import { ReactNode } from '@mdx-js/react/lib'
 import { motion, useAnimationControls } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useStore } from 'store'
 
 type Props = {
   text: string
@@ -12,7 +11,6 @@ type Props = {
 }
 
 const BlogLayout = ({ text, eyecatch, children }: Props) => {
-  const { darkMode } = useStore()
   const controls = useAnimationControls()
   // アイキャッチが読み込まれてからアニメーション
   const handleOnLoad = () => {

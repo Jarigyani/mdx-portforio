@@ -2,10 +2,9 @@ import BlogLayout from '@/MDX/BlogLayout'
 import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
-import { useEffect } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
-import { useStore } from 'store'
+import AnimDrawer from '../../components/blog/AnimDrawer'
 import Wpshell from '../../components/blog/Wpshell'
 import Wpshell2 from '../../components/blog/Wpshell2'
 import GetAllPosts from '../../components/MDX/GetAllPosts'
@@ -22,17 +21,13 @@ type Props = {
 }
 
 const PostPage = ({ mdxSource, post }: Props) => {
-  const { setChange } = useStore()
   const components = MDXComponents().components
   const mdxElement = {
     Wpshell,
     Wpshell2,
+    AnimDrawer,
     ...components,
   }
-
-  useEffect(() => {
-    setChange()
-  }, [])
 
   return (
     <>
@@ -47,13 +42,13 @@ const PostPage = ({ mdxSource, post }: Props) => {
   )
 }
 
-export const getStaticProps = async ({
-  params,
-}: {
-  params: { filename: string }
-}) => {
+type PathProps = {
+  params: {
+    filename: string
+  }
+}
+export const getStaticProps = async ({ params }: PathProps) => {
   const options = {
-    // Use one of Shiki's packaged themes
     theme: JSON.parse(fs.readFileSync('public/moonlight-ii.json', 'utf-8')),
     keepBackground: false,
   }
@@ -61,6 +56,7 @@ export const getStaticProps = async ({
   const post = GetAllPosts().posts.find(
     (post) => post.data.filename === params.filename
   )
+
   const mdxSource = await serialize(post?.content as string, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
