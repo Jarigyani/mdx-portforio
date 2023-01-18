@@ -10,3 +10,8 @@ export type Post = {
   }
   content: string
 }
+
+export type Toc = {
+  id: string
+  tag: string
+}

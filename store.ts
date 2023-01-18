@@ -9,6 +9,9 @@ type Store = {
 
   dnsName: string
   setDnsName: (text: string) => void
+
+  change: number
+  setChange: () => void
 }
 
 export const useStore = create<Store>((set) => ({
@@ -30,6 +33,13 @@ export const useStore = create<Store>((set) => ({
   setDnsName: (text: string) => {
     set(() => ({
       dnsName: text,
+    }))
+  },
+
+  change: 0,
+  setChange: () => {
+    set((state) => ({
+      change: state.change + 1,
     }))
   },
 }))

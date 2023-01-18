@@ -17,7 +17,13 @@ const ArticleCard = ({ meta }: Props) => {
     <Link href={`/blog/${meta.filename}`} key={meta.filename} scroll={false}>
       <div className="image-full card mx-auto h-52 w-80 bg-base-100 shadow-md transition-all hover:scale-105">
         <figure>
-          <Image src={meta.eyecatch} width={500} height={500} alt="eyecatch" />
+          <Image
+            priority
+            src={meta.eyecatch}
+            width={500}
+            height={500}
+            alt="eyecatch"
+          />
         </figure>
         <div className="card-body h-52">
           <h2 className="card-title text-lg">{meta.title}</h2>

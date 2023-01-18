@@ -2,8 +2,10 @@ import BlogLayout from '@/MDX/BlogLayout'
 import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
+import { useEffect } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
+import { useStore } from 'store'
 import Wpshell from '../../components/blog/Wpshell'
 import Wpshell2 from '../../components/blog/Wpshell2'
 import GetAllPosts from '../../components/MDX/GetAllPosts'
@@ -20,12 +22,18 @@ type Props = {
 }
 
 const PostPage = ({ mdxSource, post }: Props) => {
+  const { setChange } = useStore()
   const components = MDXComponents().components
   const mdxElement = {
     Wpshell,
     Wpshell2,
     ...components,
   }
+
+  useEffect(() => {
+    setChange()
+  }, [])
+
   return (
     <>
       <BlogLayout text={post.data.title} eyecatch={post.data.eyecatch}>
