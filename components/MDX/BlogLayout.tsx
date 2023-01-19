@@ -2,6 +2,7 @@ import Toc from '@/Toc'
 import { ReactNode } from '@mdx-js/react/lib'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState } from 'react'
 
 type Props = {
   text: string
@@ -11,12 +12,14 @@ type Props = {
 }
 
 const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
+  const [load, setLoad] = useState(false)
+
   return (
     <>
       <Head>
         <title>{text}</title>
       </Head>
-      <div className="mx-auto mb-5 max-w-[1200px]">
+      <div className={`mx-auto mb-5 max-w-[1200px] ${!load && 'invisible'}`}>
         <div className="flex">
           <div className="p-2 md:p-5 w-full lg:w-[calc(100%_-_300px)]">
             <div className="relative">
@@ -27,6 +30,7 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
                 alt="eyecatch image"
                 className="rounded-md drop-shadow-md mb-10"
                 priority
+                onLoad={() => setLoad(true)}
               />
               <div className="absolute top-0 left-0 h-full w-full bg-base-100 opacity-80" />
               <h1 className="absolute top-1/2 -translate-y-1/2 w-full justify-center text-xl md:text-4xl mb-6 text-center">

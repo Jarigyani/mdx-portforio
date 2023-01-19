@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { MdContentCopy } from 'react-icons/md'
 import { useStore } from 'store'
 import PreCircle from './PreCircle'
@@ -42,7 +41,7 @@ const MDXComponents = () => {
         />
       </div>
     ),
-    a: (props) => <Link {...props} />,
+    a: (props) => <a {...props} />,
     p: (props) => <p {...props} />,
     img: (props) => (
       <Image

@@ -42,9 +42,9 @@ const AnimDrawer = () => {
           showDrawer ? 'translate-x-0' : 'invisible translate-x-full'
         }`}
       >
-        <h3 className="mt-20 text-4xl font-semibold text-white">
+        <label className="mt-20 text-4xl font-semibold text-white">
           I am a Drawer
-        </h3>
+        </label>
       </div>
     </>
   )
