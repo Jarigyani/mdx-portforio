@@ -14,31 +14,31 @@ type Props = {
 
 const ArticleCard = ({ meta }: Props) => {
   return (
-    <Link href={`/blog/${meta.filename}`} key={meta.filename} scroll={false}>
-      <div className="image-full card mx-auto h-52 w-80 bg-base-100 shadow-md transition-all hover:scale-105">
-        <figure>
-          <Image
-            priority
-            src={meta.eyecatch}
-            width={500}
-            height={500}
-            alt="eyecatch"
-          />
-        </figure>
-        <div className="card-body h-52">
-          <h2 className="card-title text-lg">{meta.title}</h2>
-          <p className="text-xs">{meta.description}</p>
-          <div className="card-actions justify-end relative">
-            <div className="absolute bottom-0 left-0">
-              <label className="underline bottom-0 opacity-80 text-md">
-                {meta.date}
-              </label>
-            </div>
-            <button className="btn-primary btn bottom-3">Read Now</button>
+    <div className="image-full card mx-auto h-52 w-80 bg-base-100 shadow-md transition-all hover:scale-105">
+      <figure>
+        <Image
+          priority
+          src={meta.eyecatch}
+          width={500}
+          height={500}
+          alt="eyecatch"
+        />
+      </figure>
+      <div className="card-body h-52">
+        <h2 className="card-title text-lg">{meta.title}</h2>
+        <p className="text-xs">{meta.description}</p>
+        <div className="card-actions justify-end relative">
+          <div className="absolute bottom-0 left-0">
+            <label className="underline bottom-0 opacity-80 text-md">
+              {meta.date}
+            </label>
           </div>
+          <Link href={`/blog/${meta.filename}`} scroll={false}>
+            <button className="btn-primary btn bottom-3">Read Now</button>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 
