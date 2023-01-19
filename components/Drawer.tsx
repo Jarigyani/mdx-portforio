@@ -12,7 +12,7 @@ const Drawer = () => {
   }
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <label className="swap swap-rotate z-50">
         <input type="checkbox" onChange={handleOnChange} checked={show} />
         <ImCross className="h-8 w-8 swap-on" />

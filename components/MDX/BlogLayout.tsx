@@ -1,3 +1,4 @@
+import Drawer from '@/Drawer'
 import Toc from '@/Toc'
 import { ReactNode } from '@mdx-js/react/lib'
 import Head from 'next/head'
@@ -44,6 +45,11 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
           </div>
           <div className="hidden pl-5 sticky top-24 border-l-2 border-base-200 h-max lg:block w-[280px]">
             <Toc />
+          </div>
+          <div className="bottom-3 right-3 fixed">
+            <div className="sticky">
+              <Drawer />
+            </div>
           </div>
         </div>
       </div>
