@@ -20,16 +20,18 @@ const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
       <Head>
         <title>{text}</title>
       </Head>
-      <div className={`mx-auto mb-5 max-w-[1200px] ${!load && 'invisible'}`}>
+      <div className={`mx-auto mb-5 max-w-[1200px]`}>
         <div className="flex">
           <div className="p-2 md:p-5 w-full lg:w-[calc(100%_-_300px)]">
             <div className="relative">
               <Image
                 src={eyecatch}
-                width={860}
-                height={860}
+                width={1000}
+                height={1000}
                 alt="eyecatch image"
-                className="rounded-md drop-shadow-md mb-10"
+                className={`rounded-md drop-shadow-md mb-10 ${
+                  !load && 'invisible'
+                }`}
                 priority
                 onLoad={() => setLoad(true)}
               />
