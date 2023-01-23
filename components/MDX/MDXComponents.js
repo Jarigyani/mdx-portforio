@@ -71,7 +71,10 @@ const MDXComponents = () => {
           />
         </div>
         <div className="pt-3">
-          <pre className="px-5 pb-5 bg-base-200 overflow-x-scroll" {...props} />
+          <pre
+            className="px-5 pb-5 bg-base-200 overflow-x-scroll rounded-md"
+            {...props}
+          />
         </div>
       </div>
     ),
