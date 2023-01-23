@@ -19,7 +19,7 @@ const Drawer = () => {
         <FaHamburger className="h-8 w-8 swap-off" />
       </label>
       <div
-        className={`fixed z-30 h-screen w-80 top-0 right-0 bg-base-100 ease-in-out duration-300 ${
+        className={`fixed z-40 h-screen w-80 top-0 right-0 bg-base-100 ease-in-out duration-300 ${
           show ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
