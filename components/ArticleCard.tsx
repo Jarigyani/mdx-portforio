@@ -33,7 +33,7 @@ const ArticleCard = ({ meta }: Props) => {
               {meta.date}
             </label>
           </div>
-          <Link href={`/blog/${meta.filename}`} scroll={false}>
+          <Link href={`/blog/${meta.filename}`}>
             <button className="btn-primary btn bottom-3">Read Now</button>
           </Link>
         </div>
