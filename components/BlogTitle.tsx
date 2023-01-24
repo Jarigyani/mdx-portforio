@@ -11,7 +11,7 @@ const BlogTitle = ({ src, alt, title, publishedAt }: Props) => {
   return (
     <div className="image-full card h-max w-full bg-black shadow-md z-0">
       <figure>
-        <Image src={src} alt={alt} width={1000} height={1000} />
+        <Image src={src} alt={alt} width={1000} height={1000} priority />
       </figure>
       <div className="card-body">
         <h1 className="card-title lg:text-3xl justify-center my-auto">
