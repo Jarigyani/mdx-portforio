@@ -1,3 +1,4 @@
+import CheckBox from '@/blog/CheckBox'
 import BlogLayout from '@/MDX/BlogLayout'
 import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
@@ -32,6 +33,7 @@ const PostPage = ({ mdxSource, post }: Props) => {
     Wpshell,
     Wpshell2,
     AnimDrawer,
+    CheckBox,
     ...components,
   }
 
