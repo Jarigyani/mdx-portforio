@@ -3,7 +3,6 @@ import Drawer from '@/Drawer'
 import Toc from '@/Toc'
 import { ReactNode } from '@mdx-js/react/lib'
 import Head from 'next/head'
-import { useState } from 'react'
 
 type Props = {
   text: string
@@ -13,8 +12,6 @@ type Props = {
 }
 
 const BlogLayout = ({ text, eyecatch, children, date }: Props) => {
-  const [load, setLoad] = useState(false)
-
   return (
     <>
       <Head>

@@ -32,7 +32,13 @@ const MDXComponents = () => {
         {...props}
       />
     ),
-    h3: (props) => <h3 className="my-2 text-xl scroll-mt-16" {...props} />,
+    h3: (props) => (
+      <h3
+        className="my-2 text-xl scroll-mt-16"
+        id={props.children}
+        {...props}
+      />
+    ),
     table: (props) => (
       <div className="overflow-x-auto my-5">
         <table

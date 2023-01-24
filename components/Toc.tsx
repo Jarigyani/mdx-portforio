@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useStore } from 'store'
 import { Toc } from 'types/types'
 
 const Toc = () => {
-  const { darkMode } = useStore()
   const [toc, setToc] = useState<Toc[]>([])
 
   useEffect(() => {
-    // 読み込み時トップにスクロール
-    // const top = document.getElementById('forscroll')
-    // top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-
     const elements = document.querySelectorAll('h2, h3')
     const targets = Array.from(elements)
 
