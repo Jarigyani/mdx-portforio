@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { MdOutlineUpdate } from 'react-icons/md'
 
 type Props = {
   src: string
@@ -16,7 +17,8 @@ const BlogTitle = ({ src, alt, title, publishedAt }: Props) => {
         <h1 className="card-title lg:text-3xl justify-center my-auto">
           {title}
         </h1>
-        <label className="underline opacity-75 absolute bottom-5 right-5 text-sm">
+        <label className="flex underline opacity-75 absolute bottom-5 right-5 text-sm">
+          <MdOutlineUpdate className="h-6 w-6 mr-2" />
           {publishedAt}
         </label>
       </div>
