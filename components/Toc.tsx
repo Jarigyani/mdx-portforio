@@ -27,7 +27,7 @@ const Toc = () => {
         ])
       }
     })
-  }, [darkMode])
+  }, [])
 
   // 目次クリック時の処理
   const handleOnClick = (t: string) => {
