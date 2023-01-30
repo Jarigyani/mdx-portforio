@@ -820,6 +820,7 @@ exit
 
 ! OSPF設定
 router ospf 1
+network 10.1.0.0 0.0.255.255 area 0
 network 10.10.0.0 0.0.255.255 area 0
 network 10.20.0.0 0.0.255.255 area 0
 network 10.30.0.0 0.0.255.255 area 0
@@ -879,9 +880,13 @@ transport input ssh
 exit
 
 ! 管理IPアドレス設定
-ip default-gateway 10.1.255.254
+ip default-gateway 10.2.255.254
 int vlan1
-ip address 10.1.0.8 255.255.0.0
+ip address 10.2.0.1 255.255.0.0
+standby 1 ip 10.2.255.254
+standby 1 preempt
+standby 1 track FastEthernet0/1
+standby 1 track FastEthernet0/23
 no shutdown
 exit
 
@@ -932,6 +937,7 @@ exit
 
 ! OSPF設定
 router ospf 1
+network 10.2.0.0 0.0.255.255 area 0
 network 10.50.0.0 0.0.255.255 area 0
 network 10.60.0.0 0.0.255.255 area 0
 network 10.90.0.0 0.0.255.255 area 0
@@ -986,9 +992,13 @@ transport input ssh
 exit
 
 ! 管理IPアドレス設定
-ip default-gateway 10.1.255.254
+ip default-gateway 10.2.255.254
 int vlan1
-ip address 10.1.0.9 255.255.0.0
+ip address 10.2.0.2 255.255.0.0
+standby 1 ip 10.2.255.254
+standby 1 preempt
+standby 1 track FastEthernet0/1
+standby 1 track FastEthernet0/23
 no shutdown
 exit
 
@@ -1036,6 +1046,7 @@ standby 50 track FastEthernet0/23
 
 ! OSPF設定
 router ospf 1
+network 10.2.0.0 0.0.255.255 area 0
 network 10.50.0.0 0.0.255.255 area 0
 network 10.70.0.0 0.0.255.255 area 0
 network 10.90.0.0 0.0.255.255 area 0
@@ -1087,9 +1098,9 @@ transport input ssh
 exit
 
 ! 管理IPアドレス設定
-ip default-gateway 10.1.255.254
+ip default-gateway 10.2.255.254
 int vlan1
-ip address 10.1.0.10 255.255.0.0
+ip address 10.2.0.3 255.255.0.0
 no shutdown
 exit
 

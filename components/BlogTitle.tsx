@@ -9,7 +9,7 @@ type Props = {
 }
 const BlogTitle = ({ src, alt, title, publishedAt }: Props) => {
   return (
-    <div className="image-full card h-max w-full bg-black shadow-md z-0">
+    <div className="mb-10 image-full card h-max w-full bg-black shadow-md z-0">
       <figure>
         <Image src={src} alt={alt} width={1000} height={1000} priority />
       </figure>
