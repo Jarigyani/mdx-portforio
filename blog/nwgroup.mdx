@@ -535,19 +535,19 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 10 deny host 10.20.0.0 0.0.255.255
-access-list 10 deny host 10.30.0.0 0.0.255.255
-access-list 10 permit any
+access-list 110 deny ip 10.20.0.0 0.0.255.255 any
+access-list 110 deny ip 10.30.0.0 0.0.255.255 any
+access-list 110 permit ip any any
 
-access-list 20 deny host 10.10.0.0 0.0.255.255
-access-list 20 deny host 10.30.0.0 0.0.255.255
-access-list 20 deny host 10.50.0.0 0.0.255.255
-access-list 20 permit any
+access-list 120 deny ip 10.10.0.0 0.0.255.255 any
+access-list 120 deny ip 10.30.0.0 0.0.255.255 any
+access-list 120 deny ip 10.50.0.0 0.0.255.255 any
+access-list 120 permit ip any any
 
-access-list 30 deny host 10.10.0.0 0.0.255.255
-access-list 30 deny host 10.20.0.0 0.0.255.255
-access-list 30 deny host 10.50.0.0 0.0.255.255
-access-list 30 permit any
+access-list 130 deny ip 10.10.0.0 0.0.255.255 any
+access-list 130 deny ip 10.20.0.0 0.0.255.255 any
+access-list 130 deny ip 10.50.0.0 0.0.255.255 any
+access-list 130 permit ip any any
 
 ! インターフェース設定
 int f0/1
@@ -575,7 +575,7 @@ no shut
 
 int vlan 10
 ip address 10.10.255.252 255.255.0.0
-ip access-group 10 out
+ip access-group 110 out
 standby 10 ip 10.10.255.254
 standby 10 priority 105
 standby 10 preempt
@@ -585,7 +585,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.252 255.255.0.0
-ip access-group 20 out
+ip access-group 120 out
 standby 20 ip 10.20.255.254
 standby 20 priority 105
 standby 20 preempt
@@ -595,7 +595,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.252 255.255.0.0
-ip access-group 30 out
+ip access-group 130 out
 standby 30 ip 10.30.255.254
 standby 30 priority 105
 standby 30 preempt
@@ -719,26 +719,25 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 10 deny host 10.20.0.0 0.0.255.255
-access-list 10 deny host 10.30.0.0 0.0.255.255
-access-list 10 permit any
+access-list 110 deny ip 10.20.0.0 0.0.255.255 any
+access-list 110 deny ip 10.30.0.0 0.0.255.255 any
+access-list 110 permit ip any any
 
-access-list 20 deny host 10.10.0.0 0.0.255.255
-access-list 20 deny host 10.30.0.0 0.0.255.255
-access-list 20 deny host 10.50.0.0 0.0.255.255
-access-list 20 permit any
+access-list 120 deny ip 10.10.0.0 0.0.255.255 any
+access-list 120 deny ip 10.30.0.0 0.0.255.255 any
+access-list 120 deny ip 10.50.0.0 0.0.255.255 any
+access-list 120 permit ip any any
 
-access-list 30 deny host 10.10.0.0 0.0.255.255
-access-list 30 deny host 10.20.0.0 0.0.255.255
-access-list 30 deny host 10.50.0.0 0.0.255.255
-access-list 30 permit any
+access-list 130 deny ip 10.10.0.0 0.0.255.255 any
+access-list 130 deny ip 10.20.0.0 0.0.255.255 any
+access-list 130 deny ip 10.50.0.0 0.0.255.255 any
+access-list 130 permit ip any any
 
 ! インターフェース設定
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk native vlan 1
-ip access-group 100 out
 no shut
 
 int range f0/2-11
@@ -759,7 +758,7 @@ no shut
 
 int vlan 10
 ip address 10.10.255.253 255.255.0.0
-ip access-group 10 out
+ip access-group 110 out
 standby 10 ip 10.10.255.254
 standby 10 preempt
 standby 10 track FastEthernet0/1
@@ -768,7 +767,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.253 255.255.0.0
-ip access-group 20 out
+ip access-group 120 out
 standby 20 ip 10.20.255.254
 standby 20 preempt
 standby 20 track FastEthernet0/1
@@ -777,7 +776,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.253 255.255.0.0
-ip access-group 30 out
+ip access-group 130 out
 standby 30 ip 10.30.255.254
 standby 30 preempt
 standby 30 track FastEthernet0/1
