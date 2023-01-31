@@ -68,6 +68,7 @@ exit
 ! vlan作成
 vlan 10
 name Sales-T
+vlan 100
 exit
 
 ! スパニングツリー設定
@@ -93,7 +94,6 @@ exit
 ! native vlan無いと管理IP接続できない
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,10
 switchport trunk native vlan 1
 exit
 
@@ -153,6 +153,7 @@ exit
 ! vlan作成
 vlan 20
 name Engineer
+vlan 100
 exit
 
 ! スパニングツリー設定
@@ -177,7 +178,6 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,20
 switchport trunk native vlan 1
 exit
 
@@ -237,6 +237,7 @@ exit
 ! vlan作成
 vlan 30
 name General
+vlan 100
 exit
 
 ! スパニングツリー設定
@@ -261,7 +262,6 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,30
 switchport trunk native vlan 1
 exit
 
@@ -325,6 +325,7 @@ vlan 20
 name Engineer
 vlan 30
 name General
+vlan 100
 exit
 
 ! スパニングツリー設定
@@ -344,25 +345,21 @@ snmp-server community SNMP rw
 ! インターフェース設定
 int range f0/1-4
 switchport mode trunk
-switchport trunk allowed vlan 1,10
 switchport trunk native vlan 1
 exit
 
 int range f0/5-9
 switchport mode trunk
-switchport trunk allowed vlan 1,20
 switchport trunk native vlan 1
 exit
 
 int range f0/10
 switchport mode trunk
-switchport trunk allowed vlan 1,30
 switchport trunk native vlan 1
 exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,10,20,30,100
 switchport trunk native vlan 1
 exit
 
@@ -426,6 +423,7 @@ vlan 20
 name Engineer
 vlan 30
 name General
+vlan 100
 exit
 
 ! スパニングツリー設定
@@ -443,25 +441,21 @@ snmp-server community SNMP rw
 ! インターフェース設定
 int range f0/1-4
 switchport mode trunk
-switchport trunk allowed vlan 1,10
 switchport trunk native vlan 1
 exit
 
 int range f0/5-9
 switchport mode trunk
-switchport trunk allowed vlan 1,20
 switchport trunk native vlan 1
 exit
 
 int range f0/10
 switchport mode trunk
-switchport trunk allowed vlan 1,30
 switchport trunk native vlan 1
 exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,10,20,30,100
 switchport trunk native vlan 1
 exit
 
@@ -556,7 +550,6 @@ access-list 100 deny ip 10.50.0.0 0.0.255.255 10.30.0.0 0.0.255.255
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 1,10,20,30,100
 switchport trunk native vlan 1
 ip access-group 100 out
 no shut
@@ -738,7 +731,6 @@ access-list 100 deny ip 10.50.0.0 0.0.255.255 10.30.0.0 0.0.255.255
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 10,20,30,100
 switchport trunk native vlan 1
 ip access-group 100 out
 no shut
@@ -907,7 +899,6 @@ access-list 100 deny ip 10.30.0.0 0.0.255.255 10.50.0.0 0.0.255.255
 int range f0/1-4
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 1,50
 switchport trunk native vlan 1
 ip access-group 100 out
 no shut
@@ -1019,7 +1010,6 @@ access-list 100 deny ip 10.30.0.0 0.0.255.255 10.50.0.0 0.0.255.255
 int range f0/1-4
 switchport trunk encapsulation dot1q
 switchport mode trunk
-switchport trunk allowed vlan 1,50
 switchport trunk native vlan 1
 ip access-group 100 out
 no shut
@@ -1131,7 +1121,6 @@ exit
 
 int range f0/23-24
 switchport mode trunk
-switchport trunk allowed vlan 1,50
 switchport trunk native vlan 1
 exit
 
