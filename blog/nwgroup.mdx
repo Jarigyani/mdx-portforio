@@ -535,23 +535,17 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 100 permit ip any any
-access-list 100 deny ip 10.20.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 100 deny ip 10.30.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 100 deny ip 10.10.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.30.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.50.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.10.0.0 0.0.255.255 10.30.0.0 0.0.255.255
-access-list 100 deny ip 10.20.0.0 0.0.255.255 10.30.0.0 0.0.255.255
-access-list 100 deny ip 10.50.0.0 0.0.255.255 10.30.0.0 0.0.255.255
+access-list 100 permit ip 10.100.0.0 0.0.255.255 any
+access-list 100 permit ip 10.1.0.0 0.0.255.255 any
+access-list 100 permit ip 10.2.0.0 0.0.255.255 any
 
+access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
 
 ! インターフェース設定
 int f0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk native vlan 1
-ip access-group 100 out
 no shut
 exit
 
@@ -573,6 +567,8 @@ no shut
 
 int vlan 10
 ip address 10.10.255.252 255.255.0.0
+ip access-group 100 out
+ip access-group 110 out
 standby 10 ip 10.10.255.254
 standby 10 priority 105
 standby 10 preempt
@@ -582,6 +578,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.252 255.255.0.0
+ip access-group 100 out
 standby 20 ip 10.20.255.254
 standby 20 priority 105
 standby 20 preempt
@@ -591,6 +588,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.252 255.255.0.0
+ip access-group 100 out
 standby 30 ip 10.30.255.254
 standby 30 priority 105
 standby 30 preempt
@@ -607,11 +605,8 @@ exit
 
 ! DHCP設定
 ip dhcp excluded-address 10.10.255.252 10.10.255.254
-
 ip dhcp excluded-address 10.20.255.252 10.20.255.254
-
 ip dhcp excluded-address 10.30.255.252 10.30.255.254
-
 ip dhcp excluded-address 10.50.255.252 10.50.255.254
 
 ip dhcp pool V10
@@ -717,15 +712,10 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 100 permit ip any any
-access-list 100 deny ip 10.20.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 100 deny ip 10.30.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 100 deny ip 10.10.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.30.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.50.0.0 0.0.255.255 10.20.0.0 0.0.255.255
-access-list 100 deny ip 10.10.0.0 0.0.255.255 10.30.0.0 0.0.255.255
-access-list 100 deny ip 10.20.0.0 0.0.255.255 10.30.0.0 0.0.255.255
-access-list 100 deny ip 10.50.0.0 0.0.255.255 10.30.0.0 0.0.255.255
+access-list 100 permit ip 10.100.0.0 0.0.255.255 any
+access-list 100 permit ip 10.1.0.0 0.0.255.255 any
+access-list 100 permit ip 10.2.0.0 0.0.255.255 any
+access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
 
 ! インターフェース設定
 int f0/1
@@ -753,6 +743,8 @@ no shut
 
 int vlan 10
 ip address 10.10.255.253 255.255.0.0
+ip access-group 100 out
+ip access-group 110 out
 standby 10 ip 10.10.255.254
 standby 10 preempt
 standby 10 track FastEthernet0/1
@@ -761,6 +753,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.253 255.255.0.0
+ip access-group 100 out
 standby 20 ip 10.20.255.254
 standby 20 preempt
 standby 20 track FastEthernet0/1
@@ -769,6 +762,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.253 255.255.0.0
+ip access-group 100 out
 standby 30 ip 10.30.255.254
 standby 30 preempt
 standby 30 track FastEthernet0/1
@@ -783,11 +777,8 @@ exit
 
 ! DHCP設定
 ip dhcp excluded-address 10.10.255.252 10.10.255.254
-
 ip dhcp excluded-address 10.20.255.252 10.20.255.254
-
 ip dhcp excluded-address 10.30.255.252 10.30.255.254
-
 ip dhcp excluded-address 10.50.255.252 10.50.255.254
 
 ip dhcp pool V10
