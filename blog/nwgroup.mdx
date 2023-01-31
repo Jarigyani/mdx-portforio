@@ -535,13 +535,19 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 100 permit ip 10.100.0.0 0.0.255.255 any
-access-list 100 permit ip 10.1.0.0 0.0.255.255 any
-access-list 100 permit ip 10.2.0.0 0.0.255.255 any
-access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 110 permit ip 10.100.0.0 0.0.255.255 any
-access-list 110 permit ip 10.1.0.0 0.0.255.255 any
-access-list 110 permit ip 10.2.0.0 0.0.255.255 any
+access-list 10 deny host 10.20.0.0 0.0.255.255
+access-list 10 deny host 10.30.0.0 0.0.255.255
+access-list 10 permit any
+
+access-list 20 deny host 10.10.0.0 0.0.255.255
+access-list 20 deny host 10.30.0.0 0.0.255.255
+access-list 20 deny host 10.50.0.0 0.0.255.255
+access-list 20 permit any
+
+access-list 30 deny host 10.10.0.0 0.0.255.255
+access-list 30 deny host 10.20.0.0 0.0.255.255
+access-list 30 deny host 10.50.0.0 0.0.255.255
+access-list 30 permit any
 
 ! インターフェース設定
 int f0/1
@@ -569,8 +575,7 @@ no shut
 
 int vlan 10
 ip address 10.10.255.252 255.255.0.0
-ip access-group 100 out
-ip access-group 110 out
+ip access-group 10 out
 standby 10 ip 10.10.255.254
 standby 10 priority 105
 standby 10 preempt
@@ -580,7 +585,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.252 255.255.0.0
-ip access-group 100 out
+ip access-group 20 out
 standby 20 ip 10.20.255.254
 standby 20 priority 105
 standby 20 preempt
@@ -590,7 +595,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.252 255.255.0.0
-ip access-group 100 out
+ip access-group 30 out
 standby 30 ip 10.30.255.254
 standby 30 priority 105
 standby 30 preempt
@@ -714,13 +719,19 @@ exit
 snmp-server community SNMP rw
 
 ! ACL設定
-access-list 100 permit ip 10.100.0.0 0.0.255.255 any
-access-list 100 permit ip 10.1.0.0 0.0.255.255 any
-access-list 100 permit ip 10.2.0.0 0.0.255.255 any
-access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
-access-list 110 permit ip 10.100.0.0 0.0.255.255 any
-access-list 110 permit ip 10.1.0.0 0.0.255.255 any
-access-list 110 permit ip 10.2.0.0 0.0.255.255 any
+access-list 10 deny host 10.20.0.0 0.0.255.255
+access-list 10 deny host 10.30.0.0 0.0.255.255
+access-list 10 permit any
+
+access-list 20 deny host 10.10.0.0 0.0.255.255
+access-list 20 deny host 10.30.0.0 0.0.255.255
+access-list 20 deny host 10.50.0.0 0.0.255.255
+access-list 20 permit any
+
+access-list 30 deny host 10.10.0.0 0.0.255.255
+access-list 30 deny host 10.20.0.0 0.0.255.255
+access-list 30 deny host 10.50.0.0 0.0.255.255
+access-list 30 permit any
 
 ! インターフェース設定
 int f0/1
@@ -748,8 +759,7 @@ no shut
 
 int vlan 10
 ip address 10.10.255.253 255.255.0.0
-ip access-group 100 out
-ip access-group 110 out
+ip access-group 10 out
 standby 10 ip 10.10.255.254
 standby 10 preempt
 standby 10 track FastEthernet0/1
@@ -758,7 +768,7 @@ exit
 
 int vlan 20
 ip address 10.20.255.253 255.255.0.0
-ip access-group 100 out
+ip access-group 20 out
 standby 20 ip 10.20.255.254
 standby 20 preempt
 standby 20 track FastEthernet0/1
@@ -767,7 +777,7 @@ exit
 
 int vlan 30
 ip address 10.30.255.253 255.255.0.0
-ip access-group 100 out
+ip access-group 30 out
 standby 30 ip 10.30.255.254
 standby 30 preempt
 standby 30 track FastEthernet0/1
