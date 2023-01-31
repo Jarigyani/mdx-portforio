@@ -538,8 +538,10 @@ snmp-server community SNMP rw
 access-list 100 permit ip 10.100.0.0 0.0.255.255 any
 access-list 100 permit ip 10.1.0.0 0.0.255.255 any
 access-list 100 permit ip 10.2.0.0 0.0.255.255 any
-
 access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
+access-list 110 permit ip 10.100.0.0 0.0.255.255 any
+access-list 110 permit ip 10.1.0.0 0.0.255.255 any
+access-list 110 permit ip 10.2.0.0 0.0.255.255 any
 
 ! インターフェース設定
 int f0/1
@@ -716,6 +718,9 @@ access-list 100 permit ip 10.100.0.0 0.0.255.255 any
 access-list 100 permit ip 10.1.0.0 0.0.255.255 any
 access-list 100 permit ip 10.2.0.0 0.0.255.255 any
 access-list 110 permit ip 10.50.0.0 0.0.255.255 10.10.0.0 0.0.255.255
+access-list 110 permit ip 10.100.0.0 0.0.255.255 any
+access-list 110 permit ip 10.1.0.0 0.0.255.255 any
+access-list 110 permit ip 10.2.0.0 0.0.255.255 any
 
 ! インターフェース設定
 int f0/1
