@@ -3,6 +3,7 @@ import BlogLayout from '@/MDX/BlogLayout'
 import fs from 'fs'
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
+import Link from 'next/link'
 import { useEffect } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
@@ -34,6 +35,7 @@ const PostPage = ({ mdxSource, post }: Props) => {
     Wpshell2,
     AnimDrawer,
     CheckBox,
+    Link,
     ...components,
   }
 

@@ -1,0 +1,56 @@
+---
+"filename": "react-tutorial"
+"title": "社畜向けのReactチュートリアル"
+"date": "2023-02-20"
+"description": ""
+"eyecatch": "/blog/react-tutorial/eyecatch.svg"
+"tags": ["gakkou", "tech", "tutorils"]
+---
+
+## Hello Shachiku 👋
+
+### Windows Terminal 🖥
+
+[Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ja-jp&gl=jp&icid=TopNavWindowsApps)をインストールする
+
+### volta 🛸
+
+nodeを使えるようにするため俺のおすすめである[volta](https://github.com/volta-cli/volta/releases/download/v1.1.1/volta-1.1.1-windows-x86_64.msi)をダウンロードしてインストール
+![volta](/blog/react-tutorial/volta.png)
+
+インストールが終わったら再起動
+
+## nodeのインストール 📦
+再起動するとターミナルからvoltaコマンドが使えるようになっているので、WindowsTerminalを起動し、下記コマンドでnodeをインストールする
+
+```bash
+volta install node@18.12.1
+```
+
+> 今回は俺の環境に合わせて18.12.1をインストールする<br />
+> 今後自分で別のバージョンをインストールしたくなったら[ココ](https://docs.volta.sh/guide/)を参照するかググって
+
+## プロジェクトの作成 📝
+
+create-react-appは色々と面倒なので、viteを使う
+
+つくりたい場所に移動して、下記コマンドを実行する
+
+```bash
+npm create vite@latest
+```
+お好みの設定を対話形式で選択していく
+
+今回は👇のようにした
+
+![vite](/blog/react-tutorial/cmd01.png)
+
+下記コマンドを実行して、プロジェクトを起動する
+
+```bash
+cd react-tutorial && npm install && npm run dev
+```
+
+起動したら表示されているURL（おそらく[localhost:5173](http://localhost:5173)）にアクセスし、👇のようになっていればOK
+
+![vite](/blog/react-tutorial/site01.png)

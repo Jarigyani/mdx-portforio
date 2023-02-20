@@ -20,7 +20,7 @@ const MDXComponents = () => {
       <>
         <h1
           id={props.children}
-          className="scroll-mt-20 border-b-2 border-base-200 mt-8 mb-5 pb-2 text-3xl break-words"
+          className="scroll-mt-20 border-b-2 border-base-200 mt-10 mb-8 pb-2 text-6xl break-words"
           {...props}
         />
       </>
@@ -28,13 +28,13 @@ const MDXComponents = () => {
     h2: (props) => (
       <h2
         id={props.children}
-        className="scroll-mt-16 mt-5 mb-3 text-2xl border-b-2 border-base-200 pb-2 break-words"
+        className="scroll-mt-16 mt-10 mb-5 text-2xl border-b-2 border-base-200 pb-2 break-words md:text-4xl"
         {...props}
       />
     ),
     h3: (props) => (
       <h3
-        className="my-2 text-xl scroll-mt-16"
+        className="mt-5 mb-2 text-xl md:text-2xl scroll-mt-16"
         id={props.children}
         {...props}
       />
@@ -47,7 +47,7 @@ const MDXComponents = () => {
         />
       </div>
     ),
-    a: (props) => <a {...props} />,
+    a: (props) => <a className="underline" {...props} />,
     p: (props) => <p {...props} />,
     img: (props) => (
       <Image
@@ -87,7 +87,7 @@ const MDXComponents = () => {
     code: (props) => <code className="bg-base-200" {...props} />,
     blockquote: (props) => (
       <blockquote
-        className="opacity-80 border-l-4 border-base-300 my-2 pl-2"
+        className="opacity-80 border-l-4 border-base-300 my-4 pl-2"
         {...props}
       />
     ),
