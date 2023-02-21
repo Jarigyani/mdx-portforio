@@ -48,7 +48,7 @@ const MDXComponents = () => {
       </div>
     ),
     a: (props) => <a className="underline" {...props} />,
-    p: (props) => <p {...props} />,
+    p: (props) => <p className="leading-8" {...props} />,
     img: (props) => (
       <Image
         className="rounded-md drop-shadow-md mx-auto my-5"
