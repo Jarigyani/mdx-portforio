@@ -53,26 +53,6 @@ cd react-tutorial && npm install && npm run dev
 
 ![vite](/blog/react-tutorial/site01.png)
 
-## emotionのインストール 🎨
-
-今回はスタイリングにCSS-in-JSのemotionを使う
-
-まずはemotionをインストールする
-
-```bash
-npm install @emotion/react
-```
-
-次に、viteの設定を変更する
-
-```js
-
-```js
-plugins: [react({
-  jsxImportSource: '@emotion/react',
-})]
-```
-
 ## ESLintのインストール 🚨
 
 インストールして初期設定を行う
@@ -110,7 +90,6 @@ rules:
   react/react-in-jsx-scope: off
   react-hooks/exhaustive-deps: warn
   react-hooks/rules-of-hooks: error
-  react/no-unknown-property: [error, {ignore: [css]}] # for emotion
 
 settings:
   react:
@@ -161,6 +140,34 @@ extends:
   "semi": false,
   "useTabs": false
 }
+```
+
+## emotionのインストール 🎨
+
+今回はスタイリングにCSS-in-JSのemotionを使う
+
+まずはemotionをインストールする
+
+```bash
+npm install @emotion/react
+```
+
+次に、vite.config.jsの設定を変更する
+
+```js
+plugins: [react({
+  jsxImportSource: '@emotion/react',
+})]
+```
+eslintrc.ymlの設定も変更する
+
+```yaml
+rules:
+	react/prop-types: off
+	react/react-in-jsx-scope: off
+	react-hooks/exhaustive-deps: warn
+	react-hooks/rules-of-hooks: error
+	react/no-unknown-property: [error, {ignore: [css]}] # for emotion
 ```
 
 ## VSCodeの設定 🖥
