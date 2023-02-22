@@ -91,6 +91,9 @@ const MDXComponents = () => {
         {...props}
       />
     ),
+    ul: (props) => <ul className="list-disc ml-5" {...props} />,
+    ol: (props) => <ol className="list-decimal ml-5" {...props} />,
+    li: (props) => <li className="my-2" {...props} />,
   }
 
   return { components }

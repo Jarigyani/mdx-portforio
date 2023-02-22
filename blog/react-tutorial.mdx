@@ -7,13 +7,11 @@
 "tags": ["gakkou", "tech", "tutorils"]
 ---
 
-## Hello Shachiku 👋
-
-### Windows Terminal 🖥
+## Windows Terminal 🖥
 
 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=ja-jp&gl=jp&icid=TopNavWindowsApps)をインストールする
 
-### volta 🛸
+## volta 🛸
 
 nodeを使えるようにするため俺のおすすめである[volta](https://github.com/volta-cli/volta/releases/download/v1.1.1/volta-1.1.1-windows-x86_64.msi)をダウンロードしてインストール
 ![volta](/blog/react-tutorial/volta.png)
@@ -55,3 +53,143 @@ cd react-tutorial && npm install && npm run dev
 
 ![vite](/blog/react-tutorial/site01.png)
 
+## emotionのインストール 🎨
+
+今回はスタイリングにCSS-in-JSのemotionを使う
+
+まずはemotionをインストールする
+
+```bash
+npm install @emotion/react
+```
+
+次に、viteの設定を変更する
+
+```js
+
+```js
+plugins: [react({
+  jsxImportSource: '@emotion/react',
+})]
+```
+
+## ESLintのインストール 🚨
+
+インストールして初期設定を行う
+
+```bash
+npm install eslint eslint-plugin-react-hooks --save-dev
+
+npm init @eslint/config
+```
+
+完了すると.eslintrc.ymlが作成されるので、下記のように変更する
+
+```yaml
+env:
+  browser: true
+  es2021: true
+
+extends:
+  - eslint:recommended
+  - plugin:react/recommended
+  - plugin:react-hooks/recommended
+
+overrides: []
+
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+
+plugins:
+  - react
+  - react-hooks
+
+rules:
+  react/prop-types: off
+  react/react-in-jsx-scope: off
+  react-hooks/exhaustive-deps: warn
+  react-hooks/rules-of-hooks: error
+  react/no-unknown-property: [error, {ignore: [css]}] # for emotion
+
+settings:
+  react:
+    version: detect
+```
+
+package.jsonに下記を追記する
+
+```json
+"scripts": {
+	"lint": "eslint . --ext .js,.jsx"
+}
+```
+
+下記コマンドでlintを実行する
+
+```bash
+npm run lint
+```
+
+エラーが出たら修正する
+
+## Prettierのインストール 🎨
+
+インストールして初期設定を行う
+
+```bash
+npm install --save-dev prettier eslint-config-Prettier
+```
+
+.eslintrc.ymlに下記を追記する
+
+```yaml
+extends:
+	- eslint:recommended
+	- plugin:react/recommended
+	- plugin:react-hooks/recommended
+	- prettier
+```
+
+プロジェクト直下に.prettierrcを作成し、下記を追記する
+
+```js
+{
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "semi": false,
+  "useTabs": false
+}
+```
+
+## VSCodeの設定 🖥
+
+### 拡張機能のインストール 📦
+
+最低限入れておきたい拡張機能をインストールする
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+- [Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
+
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components)
+
+- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
+
+### 設定の変更 🛠
+
+setting.jsonに下記を追記する
+
+```json
+"[javascript]": {
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"[javascriptreact]": {
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+```
