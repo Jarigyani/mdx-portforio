@@ -104,7 +104,7 @@ package.jsonに下記を追記する
 
 ```json
 "scripts": {
-	"lint": "eslint . --ext .js,.jsx"
+	"lint": "eslint --ext .jsx,.js src/",
 }
 ```
 
@@ -121,7 +121,7 @@ npm run lint
 インストールして初期設定を行う
 
 ```bash
-npm install --save-dev prettier eslint-config-Prettier
+npm install --save-dev prettier eslint-config-prettier
 ```
 
 .eslintrc.ymlに下記を追記する
