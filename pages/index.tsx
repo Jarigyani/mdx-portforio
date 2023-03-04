@@ -1,5 +1,6 @@
 import ArticleCard from '@/ArticleCard'
 import GetAllPosts from '@/MDX/GetAllPosts'
+import { getOGP } from '@/MDX/GetOGP'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { Post } from 'types/types'
@@ -33,6 +34,7 @@ const index = ({ posts }: Props) => {
 
 export const getStaticProps = async () => {
   const props = GetAllPosts()
+  getOGP('https://sg.wantedly.com/projects/1267556')
   return { props }
 }
 
