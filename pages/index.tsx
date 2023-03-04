@@ -5,10 +5,14 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { Post } from 'types/types'
 
-type Props = { posts: Post[] }
+type Props = {
+  posts: Post[]
+  data: { title: string; description: string; image: string; url: string }
+}
 
-const index = ({ posts }: Props) => {
+const index = ({ posts, data }: Props) => {
   useEffect(() => {
+    console.log(data)
     const top = document.getElementById('forscroll')
     top?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
@@ -34,8 +38,8 @@ const index = ({ posts }: Props) => {
 
 export const getStaticProps = async () => {
   const props = GetAllPosts()
-  getOGP('https://sg.wantedly.com/projects/1267556')
-  return { props }
+  const data = getOGP('https://sg.wantedly.com/projects/1267556')
+  return { props, data }
 }
 
 export default index
