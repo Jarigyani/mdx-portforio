@@ -1,0 +1,241 @@
+---
+"filename": "golang-ogp"
+"title": "GoでOGP取得する関数作った"
+"date": "2023-03-05"
+"description": ""
+"eyecatch": "/blog/golang-ogp/eyecatch.webp"
+"tags": ["tech", "tutorils"]
+---
+
+このブログにリンクを貼るにあたって、今までは文字列にリンクを付与するような簡素なものしかなかったが、もっとおしゃれにしたくて以下のようなものを追加した
+
+<OGP url="https://jarigyani.com/blog/golang-ogp" defaultData={
+	{
+		title: "GoでOGP取得する関数作った",
+		description: "GoでOGPを取得する関数を作り、GoogleCloudFunctionsにデプロイした",
+		image: 'https://jarigyani.com/blog/golang-ogp/eyecatch.webp',
+		url: 'https://jarigyani.com/blog/golang-ogp'
+	}
+} />
+
+今回は与えたリンクからOGP情報をとってきてくれる関数をGoで作ってGoogle Cloud Functionsにデプロイしてみたので、その流れをメモ書き程度に記しておく
+
+## とりあえず関数作る
+
+Cloud Functionsは久しぶりで知識が曖昧だったので公式のクイックスタートを参照しながら進めた
+
+GCPは公式のチュートリアルがわかりやすくてとても良い
+
+[クイックスタート](https://cloud.google.com/functions/docs/create-deploy-gcloud?hl=ja)
+
+### 基本的な書き方
+
+Goでは以下のようにしてCloud Function用の関数を指定するみたい
+
+> 公式から持ってきた👇
+
+```go
+// Package helloworld provides a set of Cloud Functions samples.
+package helloworld
+
+import (
+        "fmt"
+        "net/http"
+
+        "github.com/GoogleCloudPlatform/functions-framework-go/functions"
+)
+
+func init() {
+        functions.HTTP("HelloGet", helloGet)
+}
+
+// helloGet is an HTTP Cloud Function.
+func helloGet(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprint(w, "Hello, World!")
+}
+```
+
+👆を自分の作った関数に置き換えていく
+
+### 関数本体
+
+net/httpは特に気にすることなく使えるようなので、とりあえずOGPを取得したいurlをパラメータで受け取る
+
+> 最終的には以下のようなurlでリクエストしたい
+
+> https://go-func.a.run.app?url=[URL]
+
+```go
+url := r.URL.Query().Get("url")
+if url == "" {
+	http.Error(w, "url parameter is required", http.StatusBadRequest)
+	return
+}
+```
+
+以下でサイトのドキュメントを取得
+
+> 取得にはgoqueryを使用した
+
+```go
+doc, err := goquery.NewDocument(url)
+if err != nil {
+	http.Error(w, "failed to parse html", http.StatusInternalServerError)
+	return
+}
+```
+
+レスポンスを作成して送信
+
+```go
+// OGP情報を格納するための構造体
+type Response struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
+	Url         string `json:"url"`
+}
+
+// レスポンス用のJSONを作成
+respJSON := Response{
+	Title:       doc.Find("meta[property='og:title']").AttrOr("content", ""),
+	Description: doc.Find("meta[property='og:description']").AttrOr("content", ""),
+	Image:       doc.Find("meta[property='og:image']").AttrOr("content", ""),
+	Url:         doc.Find("meta[property='og:url']").AttrOr("content", ""),
+}
+
+// JSONをエンコードしてレスポンスを送信
+w.Header().Set("Content-Type", "application/json")
+json.NewEncoder(w).Encode(respJSON)
+```
+
+### アクセス制限
+
+このままでは誰でもアクセスして使用できるので、接続元を自分のアプリに制限する
+
+関数の最初のところに以下を追記
+
+オリジンのリストは以下を参照しつつ環境変数にした(.env.yaml)
+
+[環境変数の使用](https://cloud.google.com/functions/docs/configuring/env-var?hl=ja)
+
+> contains自分で書いたけど他にあったかも
+
+```go
+// 許可するオリジンのリスト
+allowedOrigins := strings.Split(os.Getenv("ALLOWED_ORIGINS"), ",")
+
+// CORSの設定
+origin := r.Header.Get("Origin")
+if origin == "" || !contains(allowedOrigins, origin) {
+	http.Error(w, "forbidden", http.StatusForbidden)
+	return
+}
+w.Header().Set("Access-Control-Allow-Origin", origin)
+
+.
+.
+.
+
+func contains(list []string, target string) bool {
+	for _, v := range list {
+		if v == target {
+			return true
+		}
+	}
+	return false
+}
+```
+
+コード全体
+
+```go
+package ogp
+
+import (
+	"encoding/json"
+	"net/http"
+	"os"
+	"strings"
+
+	"github.com/GoogleCloudPlatform/functions-framework-go/functions"
+	"github.com/PuerkitoBio/goquery"
+)
+
+func init() {
+	functions.HTTP("GetOGP", getOGP)
+}
+
+func getOGP(w http.ResponseWriter, r *http.Request) {
+	// 許可するオリジンのリスト
+	allowedOrigins := strings.Split(os.Getenv("ALLOWED_ORIGINS"), ",")
+
+	// CORSの設定
+	origin := r.Header.Get("Origin")
+	if origin == "" || !contains(allowedOrigins, origin) {
+		http.Error(w, "forbidden", http.StatusForbidden)
+		return
+	}
+	w.Header().Set("Access-Control-Allow-Origin", origin)
+
+	url := r.URL.Query().Get("url")
+	if url == "" {
+		http.Error(w, "url parameter is required", http.StatusBadRequest)
+		return
+	}
+
+	// 指定されたURLのOGP情報を取得する
+	doc, err := goquery.NewDocument(url)
+	if err != nil {
+		http.Error(w, "failed to parse html", http.StatusInternalServerError)
+		return
+	}
+
+	// OGP情報を格納するための構造体
+	type Response struct {
+		Title       string `json:"title"`
+		Description string `json:"description"`
+		Image       string `json:"image"`
+		Url         string `json:"url"`
+	}
+
+	// レスポンス用のJSONを作成
+	respJSON := Response{
+		Title:       doc.Find("meta[property='og:title']").AttrOr("content", ""),
+		Description: doc.Find("meta[property='og:description']").AttrOr("content", ""),
+		Image:       doc.Find("meta[property='og:image']").AttrOr("content", ""),
+		Url:         doc.Find("meta[property='og:url']").AttrOr("content", ""),
+	}
+
+	// JSONをエンコードしてレスポンスを送信
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respJSON)
+}
+
+func contains(list []string, target string) bool {
+	for _, v := range list {
+		if v == target {
+			return true
+		}
+	}
+	return false
+}
+```
+
+## デプロイ
+
+以下のコマンドでデプロイする
+
+```bash
+gcloud functions deploy go-http-function \
+--env-vars-file=.env.yaml \
+--gen2 \
+--runtime=go119 \
+--region=[REGION] \
+--source=. \
+--entry-point=GetOGP \
+--trigger-http \
+--allow-unauthenticated
+```
+
+おわり
