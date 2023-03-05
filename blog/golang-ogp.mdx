@@ -26,7 +26,7 @@ Cloud Functionsは久しぶりで知識が曖昧だったので公式のクイ�
 
 GCPは公式のチュートリアルがわかりやすくてとても良い
 
-[クイックスタート](https://cloud.google.com/functions/docs/create-deploy-gcloud?hl=ja)
+<OGP url="https://cloud.google.com/functions/docs/create-deploy-gcloud?hl=ja" />
 
 ### 基本的な書き方
 
@@ -61,8 +61,7 @@ func helloGet(w http.ResponseWriter, r *http.Request) {
 
 net/httpは特に気にすることなく使えるようなので、とりあえずOGPを取得したいurlをパラメータで受け取る
 
-> 最終的には以下のようなurlでリクエストしたい
-
+> 最終的には以下のようなurlでリクエストしたい<br/>
 > https://go-func.a.run.app?url=[URL]
 
 ```go
@@ -117,7 +116,7 @@ json.NewEncoder(w).Encode(respJSON)
 
 オリジンのリストは以下を参照しつつ環境変数にした(.env.yaml)
 
-[環境変数の使用](https://cloud.google.com/functions/docs/configuring/env-var?hl=ja)
+<OGP url="https://cloud.google.com/functions/docs/configuring/env-var?hl=ja" />
 
 > contains自分で書いたけど他にあったかも
 
