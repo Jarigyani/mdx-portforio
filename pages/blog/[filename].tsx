@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 import AnimDrawer from '../../components/blog/AnimDrawer'
+import OGP from '../../components/blog/OGP'
 import Wpshell from '../../components/blog/Wpshell'
 import Wpshell2 from '../../components/blog/Wpshell2'
 import GetAllPosts from '../../components/MDX/GetAllPosts'
@@ -36,6 +37,7 @@ const PostPage = ({ mdxSource, post }: Props) => {
     AnimDrawer,
     CheckBox,
     Link,
+    OGP,
     ...components,
   }
 
