@@ -17,10 +17,6 @@ const OGP = ({ url, defaultData }: Props) => {
     })
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return (
     <a
       href={data?.url}
