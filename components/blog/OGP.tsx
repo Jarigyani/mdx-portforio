@@ -1,4 +1,4 @@
-import { getOGP } from '@/services/getOGP'
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { OGPData } from 'types/types'
 
@@ -11,9 +11,9 @@ const OGP = ({ url, defaultData }: Props) => {
   const [data, setData] = useState<OGPData>()
 
   useEffect(() => {
-    getOGP(url).then((data) => {
-      setData(data)
-      if (data.title === '' || defaultData) setData(defaultData)
+    axios.get('/api/getOGP', { params: { url: url } }).then((res) => {
+      setData(res.data)
+      if (res.data.title === '' || defaultData) setData(defaultData)
     })
   }, [])
 
