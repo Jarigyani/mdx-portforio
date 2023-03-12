@@ -1,0 +1,62 @@
+---
+"filename": "first-discord-bot"
+"title": "初めてDiscord Bot作った"
+"date": "2023-03-12"
+"description": ""
+"eyecatch": "/blog/first-discord-bot/eyecatch.png"
+"tags": ["tech", "tutorils", "discord"]
+---
+
+リポジトリは以下👇
+
+<OGP url="https://github.com/Jarigyani/discord-welcome-bot" />
+
+## 技術
+
+- python
+
+全くのゼロ知識だったので、情報の多そうなpythonで作ることにした
+
+- pycord
+
+discord.pyの方が情報多かったけど開発止まってるらしいので
+
+## 早速作る
+
+### サイトでボット作る
+
+まずはここでDiscordのApplicationとBotを作る
+
+<OGP url="https://discord.com/developers/" />
+
+BotのPrivileged Gateway Intents以下の３つのトグルはすべてオン
+
+![image](/blog/first-discord-bot/screen.png)
+
+Tokenをコピーしておく
+
+### コード書いてく
+
+環境構築は省く
+
+```python
+import discord
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOKEN = os.environ.get("TOKEN")
+
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+
+
+@bot.event
+async def on_ready():
+    print("Bot is ready.")
+
+bot.run(TOKEN)
+```
+
+この状態で動かすとターミナルに`Bot is ready.`と表示される
+
