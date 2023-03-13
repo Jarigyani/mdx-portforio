@@ -27,7 +27,14 @@ discord.pyの方が情報多かったけど開発止まってるらしいので
 
 まずはここでDiscordのApplicationとBotを作る
 
-<OGP url="https://discord.com/developers/" />
+<OGP url="https://discord.com/developers/" defaultData={
+	{
+		title:'DISCORD DEVELOPER PORTAL',
+		description: 'Applications Find the perfect feature set for your game in our Game SDK, and sign up for Server Commerce to start selling directly in your server. Get started by creating a new application. We can\'t wait to see what you make!',
+		image: 'https://pbs.twimg.com/ext_tw_video_thumb/1586176147955515393/pu/img/ye5S7adV4jawHG9B?format=jpg&name=large',
+		url: 'https://discord.com/developers/'
+	}
+}/>
 
 BotのPrivileged Gateway Intents以下の３つのトグルはすべてオン
 
@@ -58,5 +65,5 @@ async def on_ready():
 bot.run(TOKEN)
 ```
 
-この状態で動かすとターミナルに`Bot is ready.`と表示される
+この状態で動かすとターミナルに Bot is ready. と表示される
 

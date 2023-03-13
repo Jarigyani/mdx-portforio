@@ -85,7 +85,7 @@ const MDXComponents = () => {
         </div>
       </div>
     ),
-    code: (props) => <code className="bg-base-200" {...props} />,
+    code: (props) => <code className="bg-base-200 rounded-md" {...props} />,
     blockquote: (props) => (
       <blockquote
         className="opacity-80 border-l-4 border-base-300 my-4 pl-2"
